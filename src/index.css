@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #22d3ee; /* cyan-400 */
+  --color-on-primary: #020205;
+  --color-primary-container: rgba(34, 211, 238, 0.1);
+  --color-on-primary-container: #22d3ee;
+  
+  --color-secondary: rgba(255, 255, 255, 0.4);
+  --color-secondary-container: rgba(255, 255, 255, 0.05);
+  --color-on-secondary-container: rgba(255, 255, 255, 0.6);
+  
+  --color-tertiary: #a5b4fc; /* indigo-300 */
+  --color-tertiary-container: rgba(165, 180, 252, 0.1);
+  --color-on-tertiary-container: #a5b4fc;
+  
+  --color-error: #f43f5e; /* rose-500 */
+  --color-error-container: rgba(244, 63, 94, 0.1);
+  --color-on-error-container: #f43f5e;
+  
+  --color-background: #020205;
+  --color-surface: #020205;
+  --color-surface-container: rgba(255, 255, 255, 0.03);
+  --color-surface-container-low: rgba(255, 255, 255, 0.02);
+  --color-surface-container-lowest: #000000;
+  --color-outline: rgba(255, 255, 255, 0.1);
+  --color-outline-variant: rgba(255, 255, 255, 0.05);
+  
+  --font-h1: "Plus Jakarta Sans", sans-serif;
+  --font-h2: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Be Vietnam Pro", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-slate-200 antialiased selection:bg-primary/30 selection:text-white;
+  }
+}
+
+@layer components {
+  .immersive-card {
+    @apply bg-black/40 backdrop-blur-md border border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.4)];
+  }
+  
+  .glow-primary {
+    @apply shadow-[0_0_20px_rgba(34,211,238,0.2)];
+  }
+
+  .tech-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+}
