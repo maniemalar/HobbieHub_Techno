@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, LogIn, ShieldAlert, Mail, Lock, UserPlus, Fingerprint } from 'lucide-react';
+import { User, LogIn, ShieldAlert, Mail, Lock, UserPlus, Fingerprint, Settings } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { isSupabaseConfigured } from '../lib/supabase';
 
 type AuthMode = 'login' | 'register' | 'guest';
 
@@ -15,6 +16,10 @@ export default function LoginView() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isSupabaseConfigured) {
+      setError('Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your env/secrets.');
+      return;
+    }
     setIsLoading(true);
     setError(null);
     try {
@@ -32,6 +37,10 @@ export default function LoginView() {
   };
 
   const handleGuestLogin = async () => {
+    if (!isSupabaseConfigured) {
+      setError('Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your env/secrets.');
+      return;
+    }
     try {
       setIsLoading(true);
       setError(null);
@@ -74,6 +83,18 @@ export default function LoginView() {
             {mode === 'guest' && 'RESTRICTED_ACCESS_PORT'}
           </p>
         </div>
+
+        {!isSupabaseConfigured && (
+          <div className="mb-8 p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl flex flex-col gap-3">
+            <div className="flex items-center gap-3 text-amber-500">
+              <Settings className="w-5 h-5 animate-spin-slow" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Configuration Required</span>
+            </div>
+            <p className="text-[9px] text-amber-500/80 uppercase tracking-widest leading-relaxed">
+              Connectivity to Supabase is missing. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your project secrets.
+            </p>
+          </div>
+        )}
 
         {error && (
           <motion.div 
