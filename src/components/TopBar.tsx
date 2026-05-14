@@ -1,7 +1,11 @@
 import React from 'react';
-import { Search, Bell, HelpCircle } from 'lucide-react';
+import { Search, Bell, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function TopBar() {
+  const { user, signOut } = useAuth();
+  const isGuest = user?.is_anonymous;
+
   return (
     <header className="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-black/40 backdrop-blur-2xl border-b border-white/5 flex justify-between items-center px-8 z-40">
       <div className="flex items-center bg-white/5 px-4 py-2 rounded-lg w-96 border border-white/10 group focus-within:border-primary/50 transition-all">
@@ -27,16 +31,30 @@ export default function TopBar() {
         
         <div className="flex items-center gap-4 pl-8">
           <div className="text-right hidden lg:block">
-            <p className="text-[10px] font-bold text-white tracking-widest uppercase">Sarah Chen</p>
-            <p className="text-[9px] text-primary font-mono uppercase">Director Alpha-1</p>
+            <p className="text-[10px] font-bold text-white tracking-widest uppercase">
+              {isGuest ? 'GUEST_OPERATOR' : (user?.email?.split('@')[0].toUpperCase() || 'SARAH CHEN')}
+            </p>
+            <p className="text-[9px] text-primary font-mono uppercase">
+              {isGuest ? 'TEMP_ACCESS_V4' : 'Director Alpha-1'}
+            </p>
           </div>
-          <div className="relative group">
-            <img 
-              alt="Profile" 
-              className="w-10 h-10 rounded-lg border border-white/20 object-cover group-hover:border-primary/50 transition-all" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmnkawb6BdgjhcdneezAmdlZvRl_4ppQlDCwzKFJo7dM2Cju02YIjCobt9Jyz30aU5epLs_vP1ZNcG1X0s_c3y4mc0-6NcL_fT3pLhaM399enuDc4KF6p0jk81MpaeSnhtKW3v-BTAe_9r81MlT1My5cyILnx8o4jTKXjtNGosukwfH3wDA-SNTKV6N60ODKdFk54NoMGsoc5fQZOulcbS1kPymco5pu9JDjyEWRbekG105jJ-BxKJ5atYnrixs2H_1reDnpvopvXi" 
-            />
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse"></div>
+          <div className="relative group flex items-center gap-4">
+            <div className="relative">
+              <img 
+                alt="Profile" 
+                className="w-10 h-10 rounded-lg border border-white/20 object-cover group-hover:border-primary/50 transition-all" 
+                src={isGuest ? "https://github.com/identicons/guest.png" : "https://lh3.googleusercontent.com/aida-public/AB6AXuBmnkawb6BdgjhcdneezAmdlZvRl_4ppQlDCwzKFJo7dM2Cju02YIjCobt9Jyz30aU5epLs_vP1ZNcG1X0s_c3y4mc0-6NcL_fT3pLhaM399enuDc4KF6p0jk81MpaeSnhtKW3v-BTAe_9r81MlT1My5cyILnx8o4jTKXjtNGosukwfH3wDA-SNTKV6N60ODKdFk54NoMGsoc5fQZOulcbS1kPymco5pu9JDjyEWRbekG105jJ-BxKJ5atYnrixs2H_1reDnpvopvXi"} 
+              />
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse"></div>
+            </div>
+            
+            <button 
+              onClick={() => signOut()}
+              className="p-2 border border-white/10 rounded-lg text-white/40 hover:text-rose-500 hover:border-rose-500/50 hover:bg-rose-500/5 transition-all group"
+              title="Terminate Session"
+            >
+              <LogOut className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </button>
           </div>
         </div>
       </div>

@@ -6,10 +6,25 @@ import ClassesView from './views/ClassesView';
 import StudentsView from './views/StudentsView';
 import PaymentsView from './views/PaymentsView';
 import CommunicationView from './views/CommunicationView';
+import LoginView from './views/LoginView';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function App() {
+function AppContent() {
+  const { user, loading } = useAuth();
   const [currentView, setCurrentView] = useState('dashboard');
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin shadow-glow-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <LoginView />;
+  }
 
   const renderView = () => {
     switch (currentView) {
@@ -90,6 +105,14 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
