@@ -30,155 +30,144 @@ export default function ClassesView() {
   ];
 
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-8 pb-20">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-6 relative">
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-[2px] bg-primary"></div>
-            <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">MODULE_EXPLORER</span>
-          </div>
-          <h2 className="text-4xl font-light text-white tracking-widest uppercase mb-2">Class & Schedule</h2>
-          <p className="text-sm text-white/40 font-mono tracking-widest uppercase">ACTIVE_CURRICULUM // 12 MODULES_INITIALIZED</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-1">Classes & Schedule</h2>
+          <p className="text-sm text-gray-500 font-medium">12 active classes this semester</p>
         </div>
-        <button className="bg-primary text-on-primary flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:brightness-110 transition-all active:scale-95 group relative z-10 overflow-hidden">
-          <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
-          INIT_NEW_MODULE
+        <button className="flex items-center gap-2 px-6 py-2.5 bg-gray-900 text-white rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all shadow-sm active:scale-[0.98]">
+          <Plus className="w-4 h-4" />
+          Create New Class
         </button>
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Active Classes List */}
-        <div className="lg:col-span-8 flex flex-col gap-10">
-          <div className="immersive-card rounded-2xl overflow-hidden shadow-2xl">
-            <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/2">
-              <h3 className="text-[11px] font-bold text-white flex items-center gap-4 uppercase tracking-[0.4em]">
-                <Clock className="w-5 h-5 text-primary" />
-                ACTIVE_INSTANCES
+        <div className="lg:col-span-8 space-y-8">
+          <div className="minimal-card rounded-xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+              <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-gray-400" />
+                Active Classes
               </h3>
-              <div className="flex gap-4">
-                <button className="w-10 h-10 flex items-center justify-center text-white/40 bg-white/5 border border-white/10 rounded-lg hover:text-primary transition-all">
+              <div className="flex gap-2">
+                <button className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
                   <Filter className="w-4 h-4" />
                 </button>
-                <button className="w-10 h-10 flex items-center justify-center text-white/40 bg-white/5 border border-white/10 rounded-lg hover:text-primary transition-all">
+                <button className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
                   <SortAsc className="w-4 h-4" />
                 </button>
               </div>
             </div>
-            <div className="p-6 space-y-4">
+            <div className="p-4 space-y-3">
               {activeClasses.map((cls) => (
                 <motion.div 
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 4 }}
                   key={cls.id} 
-                  className="group flex flex-col md:flex-row items-center p-6 border border-white/5 rounded-2xl bg-white/[0.01] hover:bg-white/[0.03] hover:border-primary/30 transition-all cursor-pointer relative overflow-hidden"
+                  className="group flex items-center p-4 rounded-xl border border-transparent hover:bg-gray-50 hover:border-gray-100 transition-all cursor-pointer"
                 >
-                  <div className={`w-16 h-16 rounded-xl ${cls.iconBg} border border-white/5 flex items-center justify-center ${cls.iconColor} mr-0 md:mr-8 shrink-0 mb-4 md:mb-0 relative overflow-hidden group-hover:scale-110 transition-transform`}>
-                    <cls.icon className="w-10 h-10 fill-current opacity-10" />
-                    <cls.icon className="w-8 h-8 absolute" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
+                  <div className={`w-12 h-12 rounded-lg bg-gray-50 flex items-center justify-center text-gray-900 mr-5 shrink-0`}>
+                    <cls.icon className="w-6 h-6" />
                   </div>
-                  <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-6 w-full items-center">
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                     <div className="col-span-1">
-                      <h4 className="text-lg font-light text-white tracking-wide uppercase mb-2 group-hover:text-primary transition-colors">{cls.name}</h4>
-                      <div className="flex items-center text-white/40 gap-2 font-mono text-[10px] uppercase tracking-widest">
-                        <Clock className="w-3 h-3" />
+                      <h4 className="text-sm font-semibold text-gray-900 mb-0.5 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{cls.name}</h4>
+                      <div className="flex items-center text-gray-400 gap-1.5 text-xs font-medium">
+                        <Clock className="w-3.5 h-3.5" />
                         <span>{cls.time}</span>
                       </div>
                     </div>
                     <div className="col-span-1">
-                      <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest mb-2">OPERATOR</p>
-                      <p className="text-xs font-bold text-white uppercase tracking-tight">{cls.teacher}</p>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Teacher</p>
+                      <p className="text-xs font-semibold text-gray-700">{cls.teacher}</p>
                     </div>
                     <div className="col-span-1">
-                       <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest mb-2">LOAD_STATE</p>
-                      <div className="flex items-center gap-4">
-                        <div className="flex-1 h-[2px] bg-white/5 rounded-full overflow-hidden">
+                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Enrollment</p>
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden">
                           <div 
-                            className={`h-full rounded-full ${cls.full ? 'bg-rose-500' : 'bg-primary shadow-[0_0_8px_#22d3ee]'}`} 
+                            className={`h-full rounded-full ${cls.full ? 'bg-red-500' : 'bg-gray-900'}`} 
                             style={{ width: `${(cls.capacity / cls.max) * 100}%` }}
                           />
                         </div>
-                        <span className={`text-[11px] font-mono ${cls.full ? 'text-rose-500' : 'text-primary'}`}>{cls.capacity}/{cls.max}</span>
+                        <span className={`text-[11px] font-bold ${cls.full ? 'text-red-500' : 'text-gray-900'}`}>{cls.capacity}/{cls.max}</span>
                       </div>
                     </div>
                     <div className="col-span-1 md:text-right">
-                       <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest mb-2">REVENUE_STREAM</p>
-                      <p className="text-sm font-mono text-white">{cls.fee}</p>
+                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Monthly Fee</p>
+                      <p className="text-xs font-semibold text-gray-900">{cls.fee}</p>
                     </div>
                   </div>
-                  <div className="ml-6 opacity-0 group-hover:opacity-100 transition-all hidden md:block">
-                    <ChevronRight className="w-6 h-6 text-primary" />
+                  <div className="ml-4 text-gray-300 group-hover:text-gray-900 transition-all hidden md:block">
+                    <ChevronRight className="w-5 h-5" />
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Details View Mock */}
-          <div className="immersive-card rounded-2xl p-10 border-l-2 border-primary overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none" />
-            
-            <div className="flex flex-col md:flex-row items-start justify-between mb-10 pb-8 border-b border-white/5 gap-6 relative z-10">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 text-primary rounded-xl flex items-center justify-center shadow-2xl relative overflow-hidden group">
-                  <Coffee className="w-10 h-10 group-hover:scale-125 transition-transform" />
-                  <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/20 transition-all" />
+          {/* Details Section */}
+          <div className="minimal-card rounded-xl p-8 border-l-4 border-gray-900 bg-white">
+            <div className="flex flex-col md:flex-row items-start justify-between mb-8 pb-8 border-b border-gray-50 gap-6">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 bg-gray-50 text-gray-900 rounded-xl flex items-center justify-center border border-gray-100">
+                  <Coffee className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-light text-white tracking-widest uppercase mb-2">Pottery Genesis (B102)</h3>
-                  <div className="flex items-center gap-4">
-                    <span className="text-[9px] font-bold bg-primary/10 text-primary px-4 py-1.5 rounded-lg border border-primary/20 uppercase tracking-[0.2em]">MISSION_ACTIVE</span>
-                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest">UID: PRT_992_ALPHA</span>
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Pottery Genesis (B102)</h3>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-bold bg-green-50 text-green-700 px-2.5 py-1 rounded-md border border-green-100 uppercase tracking-tight">Active Session</span>
+                    <span className="text-[10px] font-medium text-gray-400 uppercase">ID: PRT_992</span>
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-8 w-full md:w-auto mt-4 md:mt-0">
+              <div className="flex items-center gap-6 w-full md:w-auto">
                 <div className="text-right">
-                  <p className="text-[9px] text-white/20 font-bold uppercase tracking-widest mb-2">SYNC_EFFICIENCY</p>
-                  <p className="font-mono text-4xl font-light text-emerald-400">94%</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Attendance</p>
+                  <p className="text-2xl font-bold text-gray-900">94%</p>
                 </div>
-                <div className="h-12 w-[1px] bg-white/5 hidden md:block"></div>
-                <button className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-white/5 border border-white/10 text-white/80 font-bold px-8 py-3.5 rounded-xl text-[10px] uppercase tracking-[0.2em] hover:bg-white/10 hover:border-primary/50 hover:text-primary transition-all group">
-                  <FileDown className="w-4 h-4 group-hover:scale-125 transition-transform" />
-                  EXPORT_DATA
+                <div className="h-10 w-px bg-gray-100 hidden md:block"></div>
+                <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 border border-gray-200 text-gray-900 font-semibold rounded-lg text-xs hover:bg-gray-50 transition-all">
+                  <FileDown className="w-4 h-4" />
+                  Export
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Students attendance */}
               <div>
-                <div className="flex justify-between items-center mb-8">
-                  <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">SYNCHRONIZED_USERS (12)</h4>
-                  <span className="text-[9px] text-primary font-mono cursor-pointer hover:underline uppercase tracking-tight">EXPAND_ALL</span>
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Enrolled Students (12)</h4>
+                  <button className="text-[11px] font-semibold text-gray-400 hover:text-gray-900">Manage</button>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   {students.map((student) => (
-                    <div key={student.id} className="flex items-center justify-between p-5 bg-white/[0.01] border border-transparent rounded-2xl hover:bg-white/[0.03] hover:border-white/10 transition-all group cursor-pointer">
-                      <div className="flex items-center gap-5">
-                        <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 font-mono text-xs font-bold uppercase group-hover:text-primary group-hover:border-primary/30 transition-all">
+                    <div key={student.id} className="flex items-center justify-between p-3.5 border border-transparent rounded-xl hover:bg-gray-50 hover:border-gray-100 transition-all group cursor-pointer">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 text-xs font-bold border border-gray-100">
                           {student.initial}
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-white uppercase tracking-wide group-hover:text-primary transition-colors leading-none mb-2">{student.name}</p>
-                          <p className="text-[9px] text-white/20 font-mono uppercase tracking-widest">ID: {student.id}</p>
+                          <p className="text-sm font-semibold text-gray-900 mb-0.5 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{student.name}</p>
+                          <p className="text-[10px] text-gray-400 font-medium">{student.id}</p>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end gap-3">
-                        <div className="flex gap-2">
+                      <div className="flex flex-col items-end gap-2">
+                        <div className="flex gap-1.5">
                           {student.attendance.map((present, idx) => (
                             <div 
                               key={idx}
-                              className={`w-2 h-2 rounded-full transition-all duration-500 ${
-                                present 
-                                  ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' 
-                                  : 'bg-rose-500 shadow-[0_0_8px_#f43f5e]'
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                present ? 'bg-green-500' : 'bg-red-400'
                               }`} 
                             />
                           ))}
                         </div>
-                        <span className={`text-[9px] font-mono uppercase tracking-widest ${student.critical ? 'text-rose-500' : 'text-white/10 group-hover:text-emerald-400 transition-colors'}`}>
+                        <span className={`text-[10px] font-bold uppercase tracking-tighter ${student.critical ? 'text-red-500' : 'text-gray-400'}`}>
                           {student.streak}
                         </span>
                       </div>
@@ -187,49 +176,39 @@ export default function ClassesView() {
                 </div>
               </div>
 
-              {/* Upcoming Schedule */}
-              <div className="bg-white/[0.02] rounded-2xl p-8 flex flex-col border border-white/5 relative overflow-hidden group">
-                <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em] mb-10">EVENT_TIMELINE</h4>
-                <div className="flex-1 space-y-12 relative ml-3">
-                  <div className="absolute left-0 top-1 bottom-1 w-[1px] bg-white/5"></div>
+              {/* Activity Timeline */}
+              <div className="bg-gray-50/50 rounded-xl p-6 border border-gray-50">
+                <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-8">Timeline</h4>
+                <div className="space-y-10 relative">
+                  <div className="absolute left-1 top-1 bottom-1 w-px bg-gray-200"></div>
                   
-                  <div className="relative pl-12 group/item">
-                    <div className="absolute left-[-4px] top-1 w-2 h-2 rounded-full bg-primary z-10 shadow-[0_0_10px_#22d3ee] animate-pulse"></div>
-                    <p className="text-[9px] font-mono text-primary uppercase tracking-[0.3em] mb-2">SESSION_08 // ACTIVE</p>
-                    <p className="text-lg font-light text-white uppercase tracking-wide group-hover/item:text-primary transition-colors mb-3">Surface Fusion Dynamics</p>
-                    <div className="flex items-center gap-6 text-[9px] text-white/30 font-bold uppercase tracking-widest">
-                      <span className="flex items-center gap-2 border border-white/5 px-2 py-1 rounded bg-white/[0.02]"><MapPin className="w-3 h-3 text-primary" /> Sector A-1</span>
-                      <span className="flex items-center gap-2 border border-white/5 px-2 py-1 rounded bg-white/[0.02]"><Clock className="w-3 h-3 text-primary" /> 10:00 — 12:30</span>
+                  <div className="relative pl-8 group">
+                    <div className="absolute left-[-3.5px] top-1.5 w-2 h-2 rounded-full bg-gray-900 z-10"></div>
+                    <p className="text-[10px] font-bold text-gray-900 uppercase tracking-tight mb-1">Current Session</p>
+                    <p className="text-base font-semibold text-gray-900 mb-2">Surface Fusion Dynamics</p>
+                    <div className="flex items-center gap-4 text-[10px] text-gray-500 font-semibold uppercase tracking-tight">
+                      <span className="flex items-center gap-1.5"><MapPin className="w-3 h-3" /> Studio A-1</span>
+                      <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> 10:00 — 12:30</span>
                     </div>
                   </div>
  
-                  <div className="relative pl-12 opacity-40 group/item hover:opacity-100 transition-opacity">
-                    <div className="absolute left-[-4px] top-1 w-2 h-2 rounded-full bg-white/10 shadow-sm border border-white/20"></div>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2">SESSION_09 // PENDING</p>
-                    <p className="text-lg font-light text-white uppercase tracking-wide">Thermal Processing Alpha</p>
+                  <div className="relative pl-8 opacity-60">
+                    <div className="absolute left-[-3.5px] top-1.5 w-2 h-2 rounded-full bg-gray-300"></div>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Next: Session 09</p>
+                    <p className="text-base font-semibold text-gray-700">Thermal Processing</p>
                   </div>
 
-                  <div className="relative pl-12 opacity-20">
-                    <div className="absolute left-[-4px] top-1 w-2 h-2 rounded-full bg-white/5 shadow-sm border border-white/10"></div>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-[0.3em] mb-2">SESSION_10 // PENDING</p>
-                    <p className="text-lg font-light text-white uppercase tracking-wide">Glaze Infusion 101</p>
-                  </div>
-
-                  <div className="mt-12 pt-10 border-t border-white/5">
-                    <div className="bg-white/2 p-6 rounded-2xl border border-white/5 flex items-center justify-between group-hover:bg-white/5 transition-all">
+                  <div className="mt-10 pt-8 border-t border-gray-200/50">
+                    <div className="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between">
                       <div>
-                        <p className="text-[9px] text-white/20 font-bold uppercase tracking-widest mb-2">RESOURCE_DEPOT</p>
-                        <p className="text-sm font-bold text-white uppercase tracking-wide">Ceramic Fusion Core</p>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Latest Update</p>
+                        <p className="text-sm font-semibold text-gray-900">Ceramic Materials Loaded</p>
                       </div>
-                      <div className="text-emerald-400 flex items-center gap-3 bg-emerald-400/5 px-4 py-2 rounded-xl border border-emerald-400/20">
-                        <span className="text-[9px] font-mono font-bold uppercase tracking-widest">LOADED</span>
-                        <CheckCircle2 className="w-4 h-4" />
+                      <div className="text-green-600 flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-lg border border-green-100">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="absolute -bottom-10 -right-10 opacity-[0.02] text-primary">
-                  <TrendingUp className="w-40 h-40" />
                 </div>
               </div>
             </div>
@@ -237,94 +216,91 @@ export default function ClassesView() {
         </div>
 
         {/* Right Sidebar Panel */}
-        <div className="lg:col-span-4 flex flex-col gap-10">
-          {/* Financial Snapshot */}
-          <div className="immersive-card rounded-2xl p-8 shadow-2xl relative overflow-hidden bg-gradient-to-br from-white/[0.02] to-transparent">
-            <h3 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.4em] mb-10">FISCAL_ANALYTICS</h3>
-            <div className="space-y-10 relative z-10">
+        <div className="lg:col-span-4 flex flex-col gap-8">
+          {/* Revenue Snapshot */}
+          <div className="minimal-card rounded-xl p-8 border border-gray-100">
+            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-10">Revenue Overview</h3>
+            <div className="space-y-8">
               <div>
-                <div className="flex justify-between items-end mb-4">
-                  <span className="text-[11px] font-bold text-white/40 uppercase tracking-widest">Total Output (Month)</span>
-                  <span className="text-[10px] text-emerald-400 font-mono border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 rounded-lg">+12.5% SYNC</span>
-                </div>
-                <p className="text-5xl font-light text-white tracking-tighter uppercase">RM 14,280</p>
-              </div>
-              <div className="space-y-8">
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">COMPLETED_CHANNELS</span>
-                    <span className="font-mono text-emerald-400">42</span>
-                  </div>
-                  <div className="h-[2px] bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-400 w-[88%] shadow-[0_0_8px_#34d399]"></div>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">PENDING_LATENCY</span>
-                    <span className="font-mono text-rose-500">06</span>
-                  </div>
-                  <div className="h-[2px] bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-rose-500 w-[12%] shadow-[0_0_8px_#f43f5e]"></div>
-                  </div>
+                <p className="text-4xl font-bold text-gray-900 tracking-tight">RM 14,280</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-[11px] font-bold text-green-600 px-2 py-0.5 bg-green-50 rounded-md border border-green-100">+12.5%</span>
+                  <span className="text-[11px] font-semibold text-gray-400">Monthly Growth</span>
                 </div>
               </div>
-              <button className="w-full bg-primary/5 border border-primary/20 text-primary py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-primary/10 transition-all shadow-sm active:scale-95">
-                GENERATE_LEDGER_REPORT
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center text-[11px] font-bold uppercase text-gray-400 tracking-tight">
+                    <span>Paid Invoices</span>
+                    <span className="text-gray-900">42</span>
+                  </div>
+                  <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-gray-900 w-[88%] rounded-full"></div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center text-[11px] font-bold uppercase text-gray-400 tracking-tight">
+                    <span>Overdue</span>
+                    <span className="text-red-500">06</span>
+                  </div>
+                  <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-red-400 w-[12%] rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+              <button className="w-full bg-gray-900 text-white py-3.5 rounded-xl font-bold text-xs hover:bg-gray-800 transition-all shadow-sm active:scale-[0.98]">
+                Generate Report
               </button>
             </div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[50px] pointer-events-none" />
           </div>
 
           {/* Occupancy Card */}
-          <div className="bg-primary text-on-primary rounded-2xl p-8 relative overflow-hidden group shadow-[0_0_40px_rgba(34,211,238,0.2)]">
-            <div className="relative z-10 flex flex-col h-full justify-between gap-10">
-              <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-80">STUDIO_UTILITIES</h3>
-                <Donut className="w-6 h-6 rotate-12 group-hover:rotate-45 transition-transform duration-700" />
-              </div>
-              <div className="flex items-center gap-8">
-                <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle className="text-white/10" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" strokeWidth="6"></circle>
-                    <circle className="text-white" cx="48" cy="48" fill="transparent" r="42" stroke="currentColor" strokeDasharray="264" strokeDashoffset="79" strokeWidth="6" strokeLinecap="round" />
-                  </svg>
-                  <span className="absolute text-2xl font-light font-mono">70%</span>
-                </div>
-                <div>
-                  <p className="font-light text-2xl uppercase tracking-tighter leading-tight mb-2">Core Load High</p>
-                  <p className="text-[10px] opacity-70 font-bold uppercase tracking-wider leading-relaxed">System nearing peak capacity between 14:00 - 18:00.</p>
-                </div>
-              </div>
-              <button className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-md py-3 rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all">OPTIMIZE_RESOURCES</button>
+          <div className="bg-gray-100 rounded-xl p-8 border border-transparent">
+            <div className="flex justify-between items-center mb-10">
+              <h3 className="text-[11px] font-bold text-gray-900 uppercase tracking-widest">Studio Load</h3>
+              <Donut className="w-5 h-5 text-gray-900" />
             </div>
-            <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-125 transition-transform duration-700">
-               <TrendingUp className="w-48 h-48" />
+            <div className="flex items-center gap-6">
+              <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
+                <svg className="w-full h-full transform -rotate-90">
+                  <circle className="text-gray-200" cx="40" cy="40" fill="transparent" r="35" stroke="currentColor" strokeWidth="5"></circle>
+                  <circle className="text-gray-900" cx="40" cy="40" fill="transparent" r="35" stroke="currentColor" strokeDasharray="220" strokeDashoffset="66" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+                <span className="absolute text-xl font-bold text-gray-900 italic">70%</span>
+              </div>
+              <div>
+                <p className="font-bold text-lg text-gray-900 tracking-tight leading-tight mb-1">Peak Load High</p>
+                <p className="text-[11px] text-gray-500 font-medium leading-relaxed">Utilization is near capacity between 2PM - 6PM.</p>
+              </div>
             </div>
+            <button className="w-full bg-white text-gray-900 border border-gray-200 mt-8 py-3 rounded-xl text-[11px] font-bold uppercase tracking-wider hover:bg-gray-50 transition-all">
+              Manage Resources
+            </button>
           </div>
 
-          {/* Activity Feed */}
-          <div className="immersive-card rounded-2xl p-8 shadow-2xl">
-            <h3 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.4em] mb-10">SIGNAL_LOGS</h3>
+          {/* Activity Logs */}
+          <div className="minimal-card rounded-xl p-8">
+            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-10">Activity Logs</h3>
             <div className="space-y-8">
               {[
-                { label: 'NEW_ENTITY: LI WEI JOINED SECTOR_7', time: '2H_AGO', icon: Plus, color: 'bg-emerald-400 shadow-[0_0_15px_#34d399]' },
-                { label: 'TRANSFER_COMPLETE: RM 450 FROM ML_TAN', time: '5H_AGO', icon: TrendingUp, color: 'bg-primary shadow-[0_0_15px_#22d3ee]' },
-                { label: 'RESCHEDULE_EVENT: B101 -> OCT_25', time: '1D_AGO', icon: Clock, color: 'bg-rose-500 shadow-[0_0_15px_#f43f5e]' },
+                { label: 'Li Wei joined Pottery Genesis', time: '2h ago', icon: Plus, color: 'text-gray-900' },
+                { label: 'Payment RM 450 from Tan Mei Ling', time: '5h ago', icon: TrendingUp, color: 'text-gray-900' },
+                { label: 'Rescheduled Watercolor Basics', time: '1d ago', icon: Clock, color: 'text-gray-900' },
               ].map((item, idx) => (
-                <div key={idx} className="flex gap-6 group cursor-pointer">
-                  <div className={`w-10 h-10 rounded-lg ${item.color} text-on-primary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform relative overflow-hidden`}>
-                    <item.icon className="w-5 h-5" />
-                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div key={idx} className="flex gap-4 group cursor-pointer">
+                  <div className={`w-8 h-8 rounded-lg bg-gray-50 border border-gray-100 ${item.color} flex items-center justify-center shrink-0 transition-transform`}>
+                    <item.icon className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-light text-white group-hover:text-primary transition-colors leading-snug mb-1 uppercase tracking-tight">{item.label}</p>
-                    <p className="text-[9px] text-white/20 font-mono font-bold uppercase tracking-widest">{item.time}</p>
+                    <p className="text-xs font-semibold text-gray-700 leading-snug mb-1 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{item.label}</p>
+                    <p className="text-[10px] text-gray-400 font-medium uppercase">{item.time}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="w-full mt-10 py-4 border border-dashed border-white/5 text-white/20 font-mono text-[9px] uppercase tracking-widest hover:border-primary/50 hover:text-primary transition-all rounded-xl">LOAD_MORE_SIGNALS</button>
+            <button className="w-full mt-10 py-3.5 border border-dashed border-gray-200 text-gray-400 font-bold text-[11px] uppercase tracking-wider hover:border-gray-900 hover:text-gray-900 transition-all rounded-xl">
+              Load More
+            </button>
           </div>
         </div>
       </div>

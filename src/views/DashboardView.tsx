@@ -35,56 +35,49 @@ export default function DashboardView() {
   ];
 
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-8 pb-20">
       {/* Welcome Header */}
-      <section className="flex flex-col md:flex-row justify-between items-end gap-6 relative">
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-[2px] bg-primary"></div>
-            <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">SYSTEM_INIT_COMPLETE</span>
-          </div>
-          <h2 className="text-4xl font-light text-white tracking-widest uppercase mb-2">Selamat Pagi, Sarah</h2>
-          <p className="text-sm text-white/40 font-mono tracking-widest uppercase">STARDATE: 2024.06.12 // SECTOR: MALAYSIA_ARTISAN</p>
+      <section className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-1">Good morning, Sarah</h2>
+          <p className="text-sm text-gray-500 font-medium">Wednesday, 12 June 2024 • Studio A Status: Active</p>
         </div>
-        <div className="flex gap-4 relative z-10">
-          <button className="flex items-center gap-3 bg-white/5 border border-white/10 text-white/80 px-8 py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 group">
-            <CheckCircle2 className="w-4 h-4 text-primary group-hover:scale-125 transition-transform" />
-            ATTENDANCE_LOG
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all active:scale-[0.98]">
+            <CheckCircle2 className="w-4 h-4 text-gray-400" />
+            Attendance
           </button>
-          <button className="flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] hover:brightness-110 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)] active:scale-95">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-all shadow-sm active:scale-[0.98]">
             <Plus className="w-4 h-4" />
-            ENROLL_STUDENT
+            Enroll Student
           </button>
         </div>
       </section>
 
       {/* Metrics Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {metrics.map((metric, idx) => (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
+            transition={{ delay: idx * 0.05 }}
             key={metric.label} 
-            className="immersive-card p-8 rounded-2xl flex items-center gap-6 group hover:border-primary/30 transition-all cursor-pointer relative overflow-hidden"
+            className="minimal-card p-6 rounded-xl flex items-center gap-5 hover:shadow-md cursor-pointer group"
           >
-            <div className={`w-16 h-16 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center ${metric.iconColor} group-hover:scale-110 transition-transform`}>
-              <metric.icon className="w-8 h-8" />
+            <div className={`w-12 h-12 rounded-lg bg-gray-50 flex items-center justify-center ${metric.iconColor === 'text-primary' ? 'text-gray-900' : metric.iconColor}`}>
+              <metric.icon className="w-6 h-6" />
             </div>
-            <div className="relative z-10">
-              <p className="text-white/20 text-[9px] font-bold uppercase tracking-[0.3em] mb-2">{metric.label}</p>
-              <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-light text-white tracking-tighter">{metric.value}</span>
+            <div>
+              <p className="text-xs font-medium text-gray-500 mb-0.5">{metric.label}</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-semibold text-gray-900">{metric.value}</span>
                 {metric.trend && (
-                  <span className="text-[10px] font-mono text-emerald-400">{metric.trend}</span>
+                  <span className="text-[11px] font-medium text-green-600">{metric.trend}</span>
                 )}
                 {metric.badge && (
-                  <span className="text-[9px] font-mono text-rose-500 animate-pulse">{metric.badge}</span>
+                  <span className="text-[10px] font-semibold text-red-500 uppercase tracking-tight">{metric.badge}</span>
                 )}
               </div>
-            </div>
-            <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
-              <metric.icon className="w-24 h-24" />
             </div>
           </motion.div>
         ))}
@@ -93,53 +86,51 @@ export default function DashboardView() {
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Timeline Schedule */}
-        <div className="lg:col-span-2 space-y-8">
-          <div className="immersive-card rounded-2xl overflow-hidden">
-            <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/2">
-              <h3 className="text-[11px] font-bold text-white flex items-center gap-4 uppercase tracking-[0.4em]">
-                <Clock className="w-5 h-5 text-primary" />
-                MISSION_SCHEDULE
+        <div className="lg:col-span-2 space-y-6">
+          <div className="minimal-card rounded-xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+              <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-gray-400" />
+                Today's Schedule
               </h3>
-              <div className="flex items-center gap-3 text-white/30 font-mono text-[10px] uppercase tracking-widest">
-                <span>COORD: 03.1397° N, 101.6869° E</span>
+              <div className="flex items-center gap-3 text-gray-400 text-xs font-medium uppercase tracking-tight">
+                <span>Kuala Lumpur Studio</span>
               </div>
             </div>
-            <div className="p-8">
-              <div className="space-y-12 relative before:absolute before:left-[110px] before:top-4 before:bottom-4 before:w-[1px] before:bg-white/5">
+            <div className="p-6">
+              <div className="space-y-10 relative">
+                <div className="absolute left-16 top-2 bottom-2 w-px bg-gray-100"></div>
                 {classes.map((cls) => (
-                  <div key={cls.time} className={`flex gap-10 group relative ${cls.opacity || ''}`}>
-                    {cls.current && (
-                      <div className="absolute left-[34px] top-1/2 -translate-y-1/2 flex items-center gap-2 z-10">
-                        <div className="w-2 h-2 bg-primary rounded-full animate-ping shadow-[0_0_10px_#22d3ee]"></div>
-                        <div className="h-[1px] w-20 bg-primary/20"></div>
-                      </div>
-                    )}
-                    <div className="w-20 text-right py-2">
-                      <span className={`text-xs font-mono tracking-widest ${cls.current ? 'text-primary' : 'text-white/20'}`}>{cls.time}</span>
+                  <div key={cls.time} className={`flex gap-6 group relative ${cls.opacity || ''}`}>
+                    <div className="w-16 text-right py-1">
+                      <span className={`text-[11px] font-semibold tracking-tight ${cls.current ? 'text-gray-900' : 'text-gray-400'}`}>{cls.time}</span>
                     </div>
-                    <div className="flex-1">
-                      <div className={`bg-white/[0.02] border-l border-white/10 p-6 rounded-r-xl group-hover:bg-white/[0.04] transition-all relative ${cls.current ? 'border-primary/50 shadow-[inset_0_0_20px_rgba(34,211,238,0.05)] bg-primary/[0.02]' : ''}`}>
+                    <div className="flex-1 relative">
+                      {cls.current && (
+                        <div className="absolute -left-[30px] top-3.5 w-2 h-2 bg-gray-900 rounded-full border-2 border-white z-10"></div>
+                      )}
+                      <div className={`p-4 rounded-xl transition-all border ${cls.current ? 'bg-gray-50/80 border-gray-100 shadow-sm' : 'bg-transparent border-transparent hover:bg-gray-50/50 hover:border-gray-100'}`}>
                         <div className="flex justify-between items-start">
                           <div>
-                            <span className="text-[9px] font-mono text-primary uppercase tracking-[0.3em] mb-3 block">{cls.tag}</span>
-                            <h4 className="text-xl font-light text-white tracking-wide uppercase mb-2">{cls.name}</h4>
-                            <p className="text-white/30 text-xs font-medium tracking-tight uppercase">OPERATOR: {cls.coach} // BAY: {cls.room}</p>
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={`w-1.5 h-1.5 rounded-full ${cls.color}`}></span>
+                              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{cls.tag}</span>
+                            </div>
+                            <h4 className="text-base font-semibold text-gray-900 mb-1">{cls.name}</h4>
+                            <p className="text-gray-500 text-xs font-medium">Studio {cls.room.split(' ')[1]} • Coach {cls.coach}</p>
                           </div>
                           <div className="text-right">
-                            <span className="text-lg font-mono text-white/80">{cls.enrolled}</span>
-                            <p className="text-[9px] font-mono text-white/20 uppercase tracking-widest mt-1">CAPACITY</p>
+                            <span className="text-sm font-medium text-gray-900">{cls.enrolled}</span>
+                            <p className="text-[10px] font-medium text-gray-400 uppercase tracking-tighter mt-0.5">Enrolled</p>
                           </div>
                         </div>
                         {cls.current && (
-                          <div className="mt-6 pt-6 border-t border-white/5 flex justify-end">
-                            <button className="text-[9px] font-bold text-primary uppercase tracking-[0.2em] px-5 py-2 border border-primary/20 bg-primary/5 rounded-lg hover:bg-primary/10 transition-all">
-                              LOG_ATTENDANCE
+                          <div className="mt-4 pt-4 border-t border-gray-200/50 flex justify-end">
+                            <button className="text-[11px] font-semibold text-gray-900 hover:underline">
+                              Manage Attendance
                             </button>
                           </div>
                         )}
-                        <div className={`absolute top-0 right-0 w-32 h-full opacity-[0.03] pointer-events-none ${cls.color.replace('bg-', 'text-')}`}>
-                           <ExternalLink className="w-full h-full p-4" />
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -150,65 +141,62 @@ export default function DashboardView() {
         </div>
 
         {/* Side Cards */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Quick Updates */}
-          <div className="immersive-card rounded-2xl overflow-hidden">
-            <div className="px-8 py-5 border-b border-white/5 flex justify-between items-center">
-              <h4 className="text-[10px] font-bold text-white uppercase tracking-[0.3em]">COMM_FEED</h4>
-              <span className="text-[9px] text-primary font-mono cursor-pointer hover:underline uppercase tracking-tight">SYNC_ALL</span>
+          <div className="minimal-card rounded-xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center">
+              <h4 className="text-xs font-semibold text-gray-900">Recent Messages</h4>
+              <button className="text-[11px] text-gray-400 font-medium hover:text-gray-900">View All</button>
             </div>
-            <div className="p-8 space-y-8">
+            <div className="p-6 space-y-6">
               {parentUpdates.map((update) => (
-                <div key={update.name} className="flex items-center gap-6 group cursor-pointer">
-                  <div className="relative">
-                    <img className="w-12 h-12 rounded-lg object-cover border border-white/10 group-hover:border-primary/50 transition-all shadow-lg" src={update.avatar} alt={update.name} />
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background"></div>
+                <div key={update.name} className="flex items-center gap-4 group cursor-pointer">
+                  <div className="relative shrink-0">
+                    <img className="w-10 h-10 rounded-lg object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all border border-gray-100" src={update.avatar} alt={update.name} />
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-bold text-white leading-tight uppercase tracking-wide group-hover:text-primary transition-colors">{update.name}</p>
-                    <p className="text-[9px] text-white/30 font-mono uppercase tracking-widest mt-1">DATA: {update.class}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">{update.name.split(' (')[0]}</p>
+                    <p className="text-[11px] text-gray-400 font-medium truncate">{update.class}</p>
                   </div>
-                  <button className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 text-white/40 flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary transition-all shadow-sm">
-                    <Send className="w-4 h-4" />
+                  <button className="w-8 h-8 rounded-lg bg-gray-50 text-gray-400 flex items-center justify-center hover:bg-gray-900 hover:text-white transition-all shadow-sm">
+                    <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>
               ))}
-              <button className="w-full py-4 border border-dashed border-white/10 text-white/30 font-bold text-[10px] uppercase tracking-[0.2em] rounded-xl hover:border-primary hover:text-primary hover:bg-primary/5 transition-all flex items-center justify-center gap-3">
-                <MessageSquare className="w-4 h-4" />
-                BROADCAST_SIGNAL
+              <button className="w-full py-3 border border-dashed border-gray-200 text-gray-400 font-semibold text-[11px] uppercase tracking-wider rounded-lg hover:border-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 mt-2">
+                <MessageSquare className="w-3.5 h-3.5" />
+                New Broadcast
               </button>
             </div>
           </div>
 
           {/* Billing Overview */}
-          <div className="immersive-card rounded-2xl p-8 border-l-2 border-primary overflow-hidden relative">
-            <div className="flex items-center gap-4 text-primary font-bold mb-8 uppercase tracking-[0.2em] text-[11px]">
-              <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center">
-                <CreditCard className="w-3.5 h-3.5" />
-              </div>
-              FISCAL_STATUS
+          <div className="minimal-card rounded-xl p-6 border-l-4 border-gray-900">
+            <div className="flex items-center gap-2 text-gray-900 font-semibold mb-6 text-sm">
+              <CreditCard className="w-4 h-4" />
+              Revenue Status
             </div>
-            <div className="space-y-6 relative z-10">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-white/40 uppercase tracking-widest font-mono">Uncollected</span>
-                <span className="font-mono text-white">RM 4,250.00</span>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center text-xs font-medium">
+                <span className="text-gray-400">Monthly Target</span>
+                <span className="text-gray-900">75% Collected</span>
               </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-white/40 uppercase tracking-widest font-mono">Dormant</span>
-                <span className="font-mono text-rose-500">08 UNITS</span>
+              <div className="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                <div className="bg-gray-900 h-full w-[75%] rounded-full"></div>
               </div>
-              <div className="space-y-3">
-                <div className="w-full bg-white/5 h-[2px] rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[75%] shadow-[0_0_10px_#22d3ee]"></div>
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div>
+                  <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Unpaid</p>
+                  <p className="text-sm font-semibold text-gray-900">RM 4,250</p>
                 </div>
-                <p className="text-[9px] text-white/20 font-mono uppercase tracking-[0.2em]">75% COLLECTION_EFFICIENCY</p>
+                <div>
+                  <p className="text-[10px] text-gray-400 uppercase font-bold mb-1">Alerts</p>
+                  <p className="text-sm font-semibold text-red-500">8 Overdue</p>
+                </div>
               </div>
-              <button className="w-full py-4 bg-white/5 border border-white/10 text-[9px] font-bold text-white uppercase tracking-[0.3em] rounded-lg hover:bg-white/10 transition-all">
-                INIT_LEDGER_REVIEW
+              <button className="w-full py-3 bg-gray-50 border border-gray-100 text-xs font-bold text-gray-900 rounded-lg hover:bg-gray-100 transition-all mt-2">
+                Review Payments
               </button>
-            </div>
-            <div className="absolute -right-10 -bottom-10 opacity-[0.02]">
-              <TrendingUp className="w-40 h-40" />
             </div>
           </div>
         </div>

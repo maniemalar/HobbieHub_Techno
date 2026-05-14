@@ -7,53 +7,48 @@ export default function TopBar() {
   const isGuest = user?.is_anonymous;
 
   return (
-    <header className="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-black/40 backdrop-blur-2xl border-b border-white/5 flex justify-between items-center px-8 z-40">
-      <div className="flex items-center bg-white/5 px-4 py-2 rounded-lg w-96 border border-white/10 group focus-within:border-primary/50 transition-all">
-        <Search className="w-5 h-5 text-white/40 group-focus-within:text-primary mr-2" />
+    <header className="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-white/80 backdrop-blur-md border-b border-gray-100 flex justify-between items-center px-8 z-40">
+      <div className="flex items-center bg-gray-50 px-4 py-1.5 rounded-lg w-80 border border-transparent focus-within:border-gray-200 focus-within:bg-white transition-all">
+        <Search className="w-4 h-4 text-gray-400 mr-2" />
         <input 
-          className="bg-transparent border-none focus:ring-0 text-xs font-medium w-full p-0 placeholder:text-white/20 text-white" 
-          placeholder="SEARCH SYSTEM DATABASE..." 
+          className="bg-transparent border-none focus:ring-0 text-sm w-full p-0 placeholder:text-gray-400 text-gray-900" 
+          placeholder="Search..." 
           type="text"
         />
       </div>
       
-      <div className="flex items-center gap-8">
-        <div className="flex items-center gap-6">
-          <button className="text-white/40 hover:text-primary transition-all cursor-pointer group relative">
-            <Bell className="w-6 h-6 group-hover:scale-110" />
-            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-primary shadow-[0_0_8px_#22d3ee] rounded-full border-2 border-background"></span>
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <button className="text-gray-400 hover:text-gray-900 transition-all cursor-pointer relative p-2 rounded-lg hover:bg-gray-50">
+            <Bell className="w-5 h-5" />
+            <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
           </button>
-          <div className="flex flex-col items-end border-r border-white/10 pr-6">
-            <span className="text-[9px] uppercase text-white/30 font-bold tracking-tighter">System Status</span>
-            <span className="text-xs font-mono text-emerald-400">OPTIMAL</span>
-          </div>
         </div>
         
-        <div className="flex items-center gap-4 pl-8">
+        <div className="h-4 w-px bg-gray-200"></div>
+
+        <div className="flex items-center gap-3">
           <div className="text-right hidden lg:block">
-            <p className="text-[10px] font-bold text-white tracking-widest uppercase">
-              {isGuest ? 'GUEST_OPERATOR' : (user?.email?.split('@')[0].toUpperCase() || 'SARAH CHEN')}
+            <p className="text-xs font-semibold text-gray-900">
+              {isGuest ? 'Guest User' : (user?.email?.split('@')[0] || 'User')}
             </p>
-            <p className="text-[9px] text-primary font-mono uppercase">
-              {isGuest ? 'TEMP_ACCESS_V4' : 'Director Alpha-1'}
+            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-tight">
+              {isGuest ? 'Limited Access' : 'Administrator'}
             </p>
           </div>
-          <div className="relative group flex items-center gap-4">
-            <div className="relative">
-              <img 
-                alt="Profile" 
-                className="w-10 h-10 rounded-lg border border-white/20 object-cover group-hover:border-primary/50 transition-all" 
-                src={isGuest ? "https://github.com/identicons/guest.png" : "https://lh3.googleusercontent.com/aida-public/AB6AXuBmnkawb6BdgjhcdneezAmdlZvRl_4ppQlDCwzKFJo7dM2Cju02YIjCobt9Jyz30aU5epLs_vP1ZNcG1X0s_c3y4mc0-6NcL_fT3pLhaM399enuDc4KF6p0jk81MpaeSnhtKW3v-BTAe_9r81MlT1My5cyILnx8o4jTKXjtNGosukwfH3wDA-SNTKV6N60ODKdFk54NoMGsoc5fQZOulcbS1kPymco5pu9JDjyEWRbekG105jJ-BxKJ5atYnrixs2H_1reDnpvopvXi"} 
-              />
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse"></div>
-            </div>
+          <div className="flex items-center gap-3">
+            <img 
+              alt="Profile" 
+              className="w-9 h-9 rounded-lg object-cover grayscale" 
+              src={isGuest ? "https://github.com/identicons/guest.png" : "https://lh3.googleusercontent.com/aida-public/AB6AXuBmnkawb6BdgjhcdneezAmdlZvRl_4ppQlDCwzKFJo7dM2Cju02YIjCobt9Jyz30aU5epLs_vP1ZNcG1X0s_c3y4mc0-6NcL_fT3pLhaM399enuDc4KF6p0jk81MpaeSnhtKW3v-BTAe_9r81MlT1My5cyILnx8o4jTKXjtNGosukwfH3wDA-SNTKV6N60ODKdFk54NoMGsoc5fQZOulcbS1kPymco5pu9JDjyEWRbekG105jJ-BxKJ5atYnrixs2H_1reDnpvopvXi"} 
+            />
             
             <button 
               onClick={() => signOut()}
-              className="p-2 border border-white/10 rounded-lg text-white/40 hover:text-rose-500 hover:border-rose-500/50 hover:bg-rose-500/5 transition-all group"
-              title="Terminate Session"
+              className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+              title="Sign out"
             >
-              <LogOut className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <LogOut className="w-5 h-5" />
             </button>
           </div>
         </div>

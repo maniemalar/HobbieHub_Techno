@@ -37,244 +37,225 @@ export default function CommunicationView() {
   ];
 
   return (
-    <div className="space-y-10 pb-20">
-      <header className="relative">
-        <div className="flex items-center gap-3 mb-4 relative z-10">
-          <div className="w-8 h-[2px] bg-primary"></div>
-          <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">COM_NETWORK_LAYER</span>
-        </div>
-        <h2 className="text-4xl font-light text-white tracking-widest uppercase mb-2 relative z-10">Parent Nexus</h2>
-        <p className="text-sm text-white/40 font-mono tracking-widest uppercase relative z-10">SIGNAL_DISPATCH // 98.2%_REACH_LOADED</p>
+    <div className="space-y-8 pb-20">
+      <header>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-1">Parent Communication</h2>
+        <p className="text-sm text-gray-500 font-medium">Broadcast messages and manage parent updates</p>
       </header>
 
-      <div className="grid grid-cols-12 gap-10">
-        {/* Left Column: Templates */}
-        <div className="col-span-12 lg:col-span-4 space-y-10">
-          <div className="immersive-card p-8 rounded-2xl shadow-2xl flex flex-col bg-gradient-to-br from-white/[0.02] to-transparent">
-            <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/5">
-              <h3 className="text-[11px] font-bold text-white uppercase tracking-[0.4em] flex items-center gap-4">
-                <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-                COM_TEMPLATES
+      <div className="grid grid-cols-12 gap-8">
+        {/* Left Column: Templates & Stats */}
+        <div className="col-span-12 lg:col-span-4 space-y-8">
+          <div className="minimal-card p-6 rounded-xl shadow-sm bg-white border border-gray-100">
+            <div className="flex items-center justify-between mb-6 pb-2 border-b border-gray-50">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-gray-400" />
+                Message Templates
               </h3>
             </div>
             
-            <div className="space-y-6">
+            <div className="space-y-3">
               {templates.map((tpl, i) => (
                 <motion.button 
-                  whileHover={{ x: 4 }}
+                  whileHover={{ y: -1 }}
                   key={i} 
-                  className="group text-left p-6 rounded-xl border border-white/5 bg-white/[0.01] hover:border-primary/50 transition-all w-full active:scale-[0.98] relative overflow-hidden"
+                  className="group text-left p-4 rounded-xl border border-transparent bg-gray-50 hover:bg-white hover:border-gray-200 transition-all w-full active:scale-[0.98] shadow-sm hover:shadow-md"
                 >
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-primary/2 opacity-0 group-hover:opacity-100 transition-opacity blur-xl rounded-full" />
-                  <div className="flex items-center gap-5 mb-4 relative z-10">
-                    <div className={`bg-white/5 text-primary p-3 rounded-lg border border-white/5 group-hover:border-primary transition-all group-hover:scale-110`}>
-                      <tpl.icon className="w-5 h-5" />
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className={`p-1.5 rounded-md bg-white border border-gray-100 group-hover:border-gray-200 transition-all`}>
+                      <tpl.icon className="w-3.5 h-3.5 text-gray-400" />
                     </div>
-                    <span className="text-[10px] font-mono font-bold text-white/40 uppercase tracking-[0.3em] group-hover:text-white transition-colors">{tpl.title}</span>
+                    <span className="text-[11px] font-bold text-gray-900 uppercase tracking-tight">{tpl.title}</span>
                   </div>
-                  <p className="text-[11px] text-white/20 font-light italic line-clamp-1 group-hover:text-white/40 transition-colors uppercase tracking-tight">
+                  <p className="text-[10px] text-gray-400 font-medium line-clamp-1 group-hover:text-gray-600 transition-colors">
                     {tpl.desc}
                   </p>
                 </motion.button>
               ))}
             </div>
-            <button className="mt-10 w-full py-5 text-[9px] font-bold uppercase tracking-[0.3em] text-primary border border-primary/20 bg-primary/5 rounded-xl hover:bg-primary/10 transition-all shadow-[0_0_15px_rgba(34,211,238,0.1)]">
-              INIT_CUSTOM_TEMPLATE
+            <button className="mt-6 w-full py-3.5 text-[11px] font-bold uppercase tracking-wider text-gray-500 border border-gray-200 bg-white rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all active:scale-[0.98]">
+              Create New Template
             </button>
           </div>
 
           <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="immersive-card p-10 rounded-3xl shadow-2xl relative overflow-hidden group border-l-2 border-primary"
+            className="minimal-card p-8 rounded-xl bg-gray-900 text-white relative overflow-hidden group shadow-lg"
           >
             <div className="relative z-10">
-              <h4 className="text-[10px] font-mono font-bold uppercase tracking-[0.4em] text-white/20 mb-6">SIGNAL_PRECISION</h4>
-              <div className="flex items-end gap-4 mb-10">
-                <span className="text-5xl font-light text-white tracking-tighter uppercase leading-none">98.2%</span>
-                <span className="mb-2 text-[9px] font-mono font-bold uppercase text-emerald-400 tracking-widest">+04% DELTA_MONTH</span>
+              <h4 className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-4">Reach Rate</h4>
+              <div className="flex items-end gap-3 mb-8">
+                <span className="text-4xl font-bold tracking-tight">98.2%</span>
+                <span className="mb-1 text-[10px] font-bold text-green-400 tracking-tight">+4.1%</span>
               </div>
-              <div className="flex gap-4 h-24 items-end px-1 relative">
-                <div className="absolute inset-0 flex flex-col justify-between opacity-5">
-                  <div className="h-px w-full bg-white" />
-                  <div className="h-px w-full bg-white" />
-                </div>
+              <div className="flex gap-2 h-16 items-end px-1">
                 {[40, 60, 85, 70, 95].map((h, i) => (
                   <div 
                     key={i} 
-                    className={`flex-1 rounded-sm transition-all duration-1000 relative overflow-hidden ${i === 4 ? 'bg-primary shadow-[0_0_20px_#22d3ee]' : 'bg-white/5 hover:bg-white/10'}`} 
+                    className={`flex-1 rounded-sm transition-all duration-700 ${i === 4 ? 'bg-white' : 'bg-white/10'}`} 
                     style={{ height: `${h}%` }}
-                  >
-                    {i === 4 && (
-                      <div className="absolute inset-0 bg-white/20 animate-pulse" />
-                    )}
-                  </div>
+                  />
                 ))}
               </div>
             </div>
-            <Layers className="absolute -right-8 -bottom-8 w-48 h-48 text-primary opacity-5 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[80px] rounded-full" />
+            <Layers className="absolute -right-8 -bottom-8 w-40 h-40 text-white/5 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
           </motion.div>
         </div>
 
         {/* Center: Compose */}
-        <div className="col-span-12 lg:col-span-8 flex flex-col gap-10">
-          <div className="immersive-card p-10 rounded-3xl shadow-2xl flex flex-col h-full bg-gradient-to-tr from-white/[0.01] to-transparent group border-l-2 border-primary">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 pb-6 border-b border-white/5 gap-6">
-              <h3 className="text-[12px] font-bold text-white tracking-[0.4em] flex items-center gap-6 uppercase">
-                <div className="w-1.5 h-12 bg-primary rounded-sm shadow-[0_0_15px_#22d3ee] group-hover:scale-y-110 transition-transform origin-center" />
-                SIGNAL_COMPOSER
+        <div className="col-span-12 lg:col-span-8 flex flex-col gap-8">
+          <div className="minimal-card p-8 rounded-xl shadow-sm bg-white border border-gray-100 flex flex-col h-full group border-l-4 border-gray-900">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-8 pb-4 border-b border-gray-50 gap-4">
+              <h3 className="text-xs font-bold text-gray-900 tracking-widest flex items-center gap-3 uppercase">
+                Compose Message
               </h3>
-              <div className="flex gap-4">
-                <button className="px-8 py-3 rounded-xl border border-white/10 bg-white/5 text-white/40 font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-white/10 hover:text-white transition-all flex items-center gap-4">
-                  <ArrowRight className="w-4 h-4 rotate-180 opacity-40" />
-                  PERSISTED_DRAFTS
+              <div className="flex gap-2">
+                <button className="px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-500 font-bold text-[10px] uppercase tracking-wider hover:bg-gray-50 hover:text-gray-900 transition-all active:scale-[0.98]">
+                  Drafts
                 </button>
               </div>
             </div>
 
-            <div className="space-y-12 flex-1">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-8 flex-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { id: 'all', label: 'BROADCAST_ALL', icon: Users, active: true },
-                  { id: 'class', label: 'LOCAL_MODULE', icon: Layers },
-                  { id: 'solo', label: 'TARGETED_ID', icon: MessageCircle },
+                  { id: 'all', label: 'Broadcast to All', icon: Users, active: true },
+                  { id: 'class', label: 'Select Class', icon: Layers },
+                  { id: 'solo', label: 'Individual Student', icon: MessageCircle },
                 ].map((opt) => (
-                  <label key={opt.id} className={`cursor-pointer border border-white/5 rounded-2xl p-8 flex flex-col items-center gap-6 transition-all relative group/opt overflow-hidden ${
-                    opt.active ? 'bg-primary/10 border-primary/30 shadow-[inset_0_0_20px_rgba(34,211,238,0.05)]' : 'bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/10'
+                  <label key={opt.id} className={`cursor-pointer border rounded-xl p-6 flex flex-col items-center gap-4 transition-all relative group/opt ${
+                    opt.active ? 'bg-gray-50 border-gray-200 shadow-sm' : 'bg-white border-gray-100 hover:border-gray-200 hover:bg-gray-50/50'
                   }`}>
                     <input name="recipient" type="radio" className="hidden" defaultChecked={opt.active} />
-                    <div className={`p-4 rounded-xl transition-all ${opt.active ? 'bg-primary text-on-primary shadow-glow-primary' : 'bg-white/5 text-white/20'}`}>
-                      <opt.icon className="w-8 h-8" />
+                    <div className={`p-3 rounded-lg transition-all ${opt.active ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-400'}`}>
+                      <opt.icon className="w-6 h-6" />
                     </div>
-                    <span className={`text-[9px] font-mono font-bold uppercase tracking-[0.3em] ${opt.active ? 'text-primary' : 'text-white/20'}`}>{opt.label}</span>
+                    <span className={`text-[10px] font-bold uppercase tracking-tight ${opt.active ? 'text-gray-900' : 'text-gray-400'}`}>{opt.label}</span>
                     {opt.active && (
-                       <div className="absolute top-0 right-0 w-8 h-8 bg-primary flex items-center justify-center rounded-bl-xl">
-                          <CheckCircle2 className="w-4 h-4 text-on-primary" />
+                       <div className="absolute top-0 right-0 p-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-gray-900" />
                        </div>
                     )}
                   </label>
                 ))}
               </div>
 
-              <div className="space-y-6">
-                <div className="flex justify-between items-center px-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20">PAYLOAD_BUFFER</label>
-                  <span className="text-[9px] font-mono text-white/10 uppercase tracking-widest">CHAR_LIMIT: 1000_BYTES</span>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center px-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Message Payload</label>
+                  <span className="text-[10px] font-bold text-gray-300 uppercase tracking-tighter">Character Limit: 1000</span>
                 </div>
-                <div className="immersive-card rounded-2xl p-8 min-h-[400px] bg-white/[0.02] border border-white/5 group/editor relative transition-all focus-within:border-primary/40 focus-within:bg-primary/[0.02]">
-                  <div className="flex flex-wrap gap-6 mb-10 pb-6 border-b border-white/5 items-center relative z-10">
-                    <button className="p-3 bg-white/5 border border-white/5 hover:border-primary/50 rounded-lg transition-all text-white/20 hover:text-primary"><Bold className="w-4.5 h-4.5" /></button>
-                    <button className="p-3 bg-white/5 border border-white/5 hover:border-primary/50 rounded-lg transition-all text-white/20 hover:text-primary"><Italic className="w-4.5 h-4.5" /></button>
-                    <button className="p-3 bg-white/5 border border-white/5 hover:border-primary/50 rounded-lg transition-all text-white/20 hover:text-primary"><Link className="w-4.5 h-4.5" /></button>
-                    <div className="w-px bg-white/5 h-6 mx-2" />
-                    <button className="flex items-center gap-4 px-6 py-3 bg-primary/10 border border-primary/20 text-primary rounded-lg text-[9px] font-mono font-bold uppercase tracking-[0.2em] hover:bg-primary/20 transition-all shadow-glow-primary active:scale-95">
-                      <Variable className="w-4 h-4" />
-                      INJECT_VAR
+                <div className="minimal-card rounded-xl p-6 min-h-[360px] bg-gray-50/50 border border-gray-100 flex flex-col group/editor focus-within:border-gray-900 transition-all">
+                  <div className="flex flex-wrap gap-4 mb-6 pb-4 border-b border-gray-100 items-center">
+                    <button className="p-2 border border-transparent hover:border-gray-200 rounded text-gray-400 hover:text-gray-900 transition-all"><Bold className="w-4 h-4" /></button>
+                    <button className="p-2 border border-transparent hover:border-gray-200 rounded text-gray-400 hover:text-gray-900 transition-all"><Italic className="w-4 h-4" /></button>
+                    <button className="p-2 border border-transparent hover:border-gray-200 rounded text-gray-400 hover:text-gray-900 transition-all"><Link className="w-4 h-4" /></button>
+                    <div className="w-[1px] bg-gray-200 h-4 mx-1" />
+                    <button className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 text-gray-500 rounded text-[10px] font-bold uppercase tracking-tight hover:text-gray-900 hover:border-gray-300 transition-all">
+                      <Variable className="w-3 h-3" />
+                      Add Field
                     </button>
                   </div>
                   <textarea 
-                    className="w-full bg-transparent border-none focus:ring-0 p-0 text-white font-light text-lg uppercase tracking-wider min-h-[250px] resize-none placeholder:text-white/10 placeholder:italic leading-relaxed tracking-widest" 
-                    placeholder="ENTER_PAYLOAD_DATA..._SMART_SYNC_ACTIVE"
+                    className="w-full bg-transparent border-none focus:ring-0 p-0 text-gray-900 font-medium text-base uppercase tracking-tight min-h-[220px] resize-none placeholder:text-gray-300 placeholder:normal-case" 
+                    placeholder="Type your message here..."
                   />
-                  <div className="absolute bottom-8 right-8 opacity-0 group-focus-within/editor:opacity-100 transition-opacity">
-                    <div className="flex items-center gap-4 bg-emerald-400/10 border border-emerald-400/20 px-4 py-2 rounded-lg">
-                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                       <span className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-widest leading-none">AUTO_SAVE_SUCCESS</span>
+                  <div className="mt-4 flex justify-end opacity-0 group-focus-within/editor:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-[10px] font-bold text-green-600 uppercase tracking-tight">
+                       <CheckCircle2 className="w-3.5 h-3.5" />
+                       Draft saved
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center justify-between gap-10 pt-10">
-                <div className="flex gap-12 w-full md:w-auto relative z-10">
-                  <label className="flex items-center gap-4 cursor-pointer group/cb">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-4">
+                <div className="flex gap-8 w-full md:w-auto">
+                  <label className="flex items-center gap-3 cursor-pointer group/cb">
                     <input defaultChecked className="peer hidden" type="checkbox" />
-                    <div className="w-7 h-7 rounded-lg border-2 border-white/5 flex items-center justify-center transition-all bg-white/5 peer-checked:bg-primary peer-checked:border-primary shadow-inner">
-                       <CheckCircle2 className="opacity-0 peer-checked:opacity-100 w-5 h-5 text-on-primary transition-opacity" />
+                    <div className="w-6 h-6 rounded border border-gray-200 flex items-center justify-center transition-all bg-white peer-checked:bg-gray-900 peer-checked:border-gray-900">
+                       <CheckCircle2 className="opacity-0 peer-checked:opacity-100 w-4 h-4 text-white transition-opacity" />
                     </div>
-                    <span className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 peer-checked:text-white group-hover/cb:text-white/60 transition-colors">
-                      <MessageCircle className="w-5 h-5 text-[#25D366] opacity-60" /> WHATSAPP
+                    <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-tight text-gray-400 peer-checked:text-gray-900 transition-colors">
+                      <MessageCircle className="w-4 h-4 text-green-600" /> WhatsApp
                     </span>
                   </label>
-                  <label className="flex items-center gap-4 cursor-pointer group/cb">
+                  <label className="flex items-center gap-3 cursor-pointer group/cb">
                     <input className="peer hidden" type="checkbox" />
-                    <div className="w-7 h-7 rounded-lg border-2 border-white/5 flex items-center justify-center transition-all bg-white/5 peer-checked:bg-primary peer-checked:border-primary shadow-inner">
-                       <CheckCircle2 className="opacity-0 peer-checked:opacity-100 w-5 h-5 text-on-primary transition-opacity" />
+                    <div className="w-6 h-6 rounded border border-gray-200 flex items-center justify-center transition-all bg-white peer-checked:bg-gray-900 peer-checked:border-gray-900">
+                       <CheckCircle2 className="opacity-0 peer-checked:opacity-100 w-4 h-4 text-white transition-opacity" />
                     </div>
-                    <span className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 peer-checked:text-white group-hover/cb:text-white/60 transition-colors">
-                      <Mail className="w-5 h-5 text-primary opacity-60" /> EMAIL_SYNC
+                    <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-tight text-gray-400 peer-checked:text-gray-900 transition-colors">
+                      <Mail className="w-4 h-4 text-gray-400" /> Email
                     </span>
                   </label>
                 </div>
-                <div className="flex gap-6 w-full md:w-auto relative z-10">
-                  <button className="flex-1 md:flex-none px-10 py-5 rounded-xl border border-primary/20 bg-primary/5 text-primary font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-primary/10 transition-all active:scale-95 shadow-[0_0_20px_rgba(34,211,238,0.1)]">SCHEDULE_QUEUE</button>
-                  <button className="flex-1 md:flex-none px-14 py-5 rounded-xl bg-primary text-on-primary font-bold text-[10px] uppercase tracking-[0.4em] hover:brightness-110 active:scale-95 transition-all shadow-[0_0_30px_rgba(34,211,238,0.4)] flex items-center justify-center gap-4 group">
-                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    DISPATCH_NOW
+                <div className="flex gap-4 w-full md:w-auto">
+                  <button className="flex-1 md:flex-none px-6 py-3.5 rounded-lg border border-gray-200 bg-white text-gray-500 font-bold text-[11px] uppercase tracking-wider hover:bg-gray-50 transition-all active:scale-[0.98]">Schedule</button>
+                  <button className="flex-1 md:flex-none px-8 py-3.5 rounded-lg bg-gray-900 text-white font-bold text-[11px] uppercase tracking-widest hover:bg-gray-800 active:scale-[0.98] transition-all flex items-center justify-center gap-3 group">
+                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    Send Now
                   </button>
                 </div>
               </div>
             </div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
           </div>
         </div>
 
         {/* Bottom Log */}
         <div className="col-span-12">
-          <div className="immersive-card rounded-3xl shadow-2xl overflow-hidden group border-t-2 border-primary">
-            <div className="px-10 py-8 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
-              <h3 className="text-[12px] font-bold text-white uppercase tracking-[0.5em]">SIGNAL_DISPATCH_LEDGER</h3>
-              <button className="flex items-center gap-4 text-primary font-bold text-[10px] uppercase tracking-[0.3em] hover:brightness-125 transition-all group/lnk">
-                COMPLETE_ARCHIVE
-                <ArrowRight className="w-4 h-4 group-hover/lnk:translate-x-2 transition-transform" />
+          <div className="minimal-card rounded-xl shadow-sm overflow-hidden bg-white border border-gray-100 group border-t-2 border-gray-900">
+            <div className="px-8 py-6 border-b border-gray-50 flex items-center justify-between">
+              <h3 className="text-xs font-bold text-gray-900 uppercase tracking-[0.2em]">Message History</h3>
+              <button className="flex items-center gap-2 text-gray-400 hover:text-gray-900 font-bold text-[11px] uppercase tracking-wider transition-all">
+                Full Archive
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left min-w-[900px]">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-white/[0.02] border-b border-white/5">
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">NODE_TARGET</th>
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">SIGNAL_TYPE</th>
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">TIME_STAMP</th>
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">DELIVERY_LOAD</th>
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">SYNC_SUCCESS</th>
-                    <th className="py-8 px-10 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em] text-right">MONITOR</th>
+                  <tr className="bg-gray-50/50 border-b border-gray-100">
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Recipient</th>
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Type</th>
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Time</th>
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Channels</th>
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Status</th>
+                    <th className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-wider text-right">View</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/2">
+                <tbody className="divide-y divide-gray-50">
                   {logs.map((log, i) => (
-                    <tr key={i} className="hover:bg-white/[0.03] transition-all group/row cursor-pointer">
-                      <td className="py-8 px-10">
-                        <div className="flex items-center gap-6">
+                    <tr key={i} className="hover:bg-gray-50/30 transition-all group/row cursor-pointer">
+                      <td className="py-5 px-8">
+                        <div className="flex items-center gap-4">
                           {log.avatar ? (
-                            <img className="w-12 h-12 rounded-lg object-cover border border-white/10 group-hover/row:border-primary/50 transition-all shadow-xl" src={log.avatar} alt={log.recipient} />
+                            <img className="w-10 h-10 rounded-lg object-cover grayscale opacity-80 group-hover/row:grayscale-0 group-hover/row:opacity-100 border border-gray-100 transition-all" src={log.avatar} alt={log.recipient} />
                           ) : (
-                            <div className={`w-12 h-12 rounded-lg border border-white/5 ${log.isGroup ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(34,211,238,0.1)]' : 'bg-white/5 text-white/20'} flex items-center justify-center transition-all group-hover/row:border-primary/40`}>
-                              {log.isGroup ? <Users className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+                            <div className={`w-10 h-10 rounded-lg border border-gray-100 bg-gray-50 text-gray-400 flex items-center justify-center transition-all group-hover/row:bg-gray-100 group-hover/row:text-gray-900`}>
+                              {log.isGroup ? <Users className="w-5 h-5" /> : <MessageSquare className="w-5 h-5" />}
                             </div>
                           )}
-                          <span className="text-sm font-light text-white uppercase tracking-tight group-hover/row:text-primary transition-colors leading-none">{log.recipient}</span>
+                          <span className="text-sm font-bold text-gray-900 uppercase tracking-tight group-hover/row:text-blue-600 transition-colors leading-none">{log.recipient}</span>
                         </div>
                       </td>
-                      <td className="py-8 px-10 text-[10px] font-mono font-bold text-white/30 uppercase tracking-widest">{log.type}</td>
-                      <td className="py-8 px-10 text-[11px] font-mono text-white/20 uppercase tracking-widest">{log.time}</td>
-                      <td className="py-8 px-10">
-                        <div className="flex gap-6">
-                          <MessageCircle className={`w-6 h-6 transition-all ${log.methods[0] ? 'text-emerald-400 group-hover/row:scale-110' : 'text-white/5'}`} />
-                          <Mail className={`w-6 h-6 transition-all ${log.methods[1] ? 'text-primary group-hover/row:scale-110' : 'text-white/5'}`} />
+                      <td className="py-5 px-8 text-[10px] font-bold text-gray-400 uppercase tracking-tight">{log.type}</td>
+                      <td className="py-5 px-8 text-[11px] font-bold text-gray-300 uppercase tracking-tighter">{log.time}</td>
+                      <td className="py-5 px-8">
+                        <div className="flex gap-4">
+                          <MessageCircle className={`w-5 h-5 transition-all ${log.methods[0] ? 'text-green-600' : 'text-gray-100'}`} />
+                          <Mail className={`w-5 h-5 transition-all ${log.methods[1] ? 'text-gray-800' : 'text-gray-100'}`} />
                         </div>
                       </td>
-                      <td className="py-8 px-10">
-                        <span className={`inline-block px-5 py-2 rounded-lg text-[9px] font-mono uppercase tracking-[0.2em] border ${
-                          log.status === 'DELIVERED' || log.status === 'READ' ? 'bg-emerald-400/10 text-emerald-400 border-emerald-400/20 shadow-[0_0_15px_rgba(52,211,153,0.1)]' : 'bg-amber-400/10 text-amber-400 border-amber-400/20'
+                      <td className="py-5 px-8">
+                        <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-tight border ${
+                          log.status === 'DELIVERED' || log.status === 'READ' ? 'bg-green-50 text-green-700 border-green-100' : 'bg-amber-50 text-amber-700 border-amber-100'
                         }`}>
                           {log.status}
                         </span>
                       </td>
-                      <td className="py-8 px-10 text-right">
-                        <button className="p-4 bg-white/5 border border-white/10 rounded-xl text-white/10 hover:text-primary hover:border-primary/40 transition-all active:scale-75 relative group/btn overflow-hidden">
-                          <Eye className="w-5 h-5 relative z-10" />
-                          <div className="absolute inset-0 bg-primary/0 group-hover/btn:bg-primary/5 transition-all" />
+                      <td className="py-5 px-8 text-right">
+                        <button className="p-2.5 bg-white border border-gray-200 rounded-lg text-gray-300 hover:text-gray-900 hover:border-gray-900 transition-all active:scale-95">
+                          <Eye className="w-4 h-4" />
                         </button>
                       </td>
                     </tr>

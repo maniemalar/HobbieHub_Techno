@@ -24,133 +24,126 @@ export default function PaymentsView() {
   ];
 
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-8 pb-20">
       {/* Header Actions */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-6 relative">
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-[2px] bg-primary"></div>
-            <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">FISCAL_DASHBOARD</span>
-          </div>
-          <h2 className="text-4xl font-light text-white tracking-widest uppercase mb-2">Payments & Fees</h2>
-          <p className="text-sm text-white/40 font-mono tracking-widest uppercase">SYD_OCT_2023 // 100%_INTEGRITY</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-1">Payments & Fees</h2>
+          <p className="text-sm text-gray-500 font-medium">Monthly revenue and collection status</p>
         </div>
-        <div className="flex gap-4 relative z-10">
-          <button className="flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-white/40 rounded-xl font-bold text-[10px] uppercase tracking-[0.3em] hover:bg-white/10 hover:text-white transition-all group overflow-hidden">
-            <FileDown className="w-4 h-4 group-hover:scale-125 transition-transform" />
-            EXPORT_PDF
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all active:scale-[0.98]">
+            <FileDown className="w-4 h-4 text-gray-400" />
+            Export Data
           </button>
-          <button className="flex items-center gap-3 px-8 py-4 bg-primary text-on-primary rounded-xl font-bold text-[10px] uppercase tracking-[0.3em] hover:brightness-110 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)] group relative overflow-hidden">
-            <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            MASS_SIGNAL_REMINDER
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all shadow-sm active:scale-[0.98]">
+            <Send className="w-4 h-4" />
+            Send Reminders
           </button>
         </div>
       </div>
 
-      {/* Summary Bento Boxes */}
+      {/* Summary Stats */}
       <div className="grid grid-cols-12 gap-8">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="col-span-12 lg:col-span-4 bg-primary text-on-primary rounded-3xl p-10 shadow-[0_0_40px_rgba(34,211,238,0.2)] flex flex-col justify-between relative overflow-hidden group border border-white/10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="col-span-12 lg:col-span-4 bg-gray-900 text-white rounded-xl p-8 shadow-sm flex flex-col justify-between relative overflow-hidden group"
         >
           <div className="relative z-10">
-            <p className="text-[10px] font-bold uppercase opacity-60 tracking-[0.4em] mb-6">MONTHLY_REVENUE</p>
-            <h3 className="text-5xl font-light tracking-tighter uppercase">RM 12,450.00</h3>
-            <div className="mt-6 bg-white/10 w-fit px-4 py-1.5 rounded-lg text-[9px] font-mono uppercase tracking-[0.1em] border border-white/10">
-              +12% DELTA_MONTH
+            <p className="text-[11px] font-bold uppercase text-gray-400 tracking-wider mb-6">Monthly Revenue</p>
+            <h3 className="text-4xl font-bold tracking-tight">RM 12,450.00</h3>
+            <div className="mt-4 bg-white/10 w-fit px-3 py-1 rounded-md text-[10px] font-bold tracking-tight border border-white/10">
+              +12.4% vs last month
             </div>
           </div>
-          <div className="mt-16 flex items-end justify-between relative z-10">
+          <div className="mt-12 flex items-end justify-between relative z-10">
             <div className="flex flex-col">
-              <span className="text-[9px] font-bold uppercase opacity-50 tracking-[0.3em] mb-3">TARGET_COLLECTION</span>
-              <span className="text-2xl font-light tracking-tighter uppercase">RM 15,000.00</span>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Target</span>
+              <span className="text-xl font-bold tracking-tight text-gray-300">RM 15,000.00</span>
             </div>
-            <CreditCard className="w-20 h-20 opacity-10 absolute -right-6 -bottom-6 group-hover:scale-125 transition-transform duration-700 -rotate-12" />
+            <CreditCard className="w-16 h-16 text-white/5 absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform duration-700" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
         </motion.div>
         
-        <div className="col-span-12 lg:col-span-4 immersive-card rounded-3xl p-10 shadow-2xl flex items-center gap-8 group hover:border-primary/40 transition-all cursor-pointer">
-          <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform relative overflow-hidden">
-            <CheckCircle2 className="w-10 h-10" />
-            <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/20 transition-all" />
+        <div className="col-span-12 lg:col-span-4 minimal-card rounded-xl p-8 shadow-sm flex items-center gap-6 bg-white border border-gray-100 group transition-all cursor-pointer">
+          <div className="w-14 h-14 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center text-green-600 shrink-0">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
           <div>
-            <p className="text-white/20 font-bold text-[10px] uppercase tracking-[0.3em] mb-3">SYNCHRONIZED_ENTITIES</p>
-            <p className="text-4xl font-light text-white tracking-tighter uppercase">42 <span className="text-xl font-mono text-white/20">/ 50</span></p>
+            <p className="text-gray-400 font-bold text-[11px] uppercase tracking-wider mb-1">Collected</p>
+            <p className="text-3xl font-bold text-gray-900 tracking-tight">42 <span className="text-lg font-medium text-gray-300">/ 50</span></p>
           </div>
         </div>
 
-        <div className="col-span-12 lg:col-span-4 immersive-card rounded-3xl p-10 shadow-2xl flex items-center gap-8 group hover:border-rose-500/40 transition-all cursor-pointer border-r-2 border-rose-500/20">
-          <div className="w-20 h-20 rounded-2xl bg-rose-500/5 border border-rose-500/10 flex items-center justify-center text-rose-500 group-hover:scale-110 transition-transform relative overflow-hidden">
-            <AlertCircle className="w-10 h-10" />
-            <div className="absolute inset-0 bg-rose-500/5 group-hover:bg-rose-500/20 transition-all" />
+        <div className="col-span-12 lg:col-span-4 minimal-card rounded-xl p-8 shadow-sm flex items-center gap-6 bg-white border border-gray-100 group transition-all cursor-pointer">
+          <div className="w-14 h-14 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center text-red-600 shrink-0">
+            <AlertCircle className="w-7 h-7" />
           </div>
           <div>
-            <p className="text-white/20 font-bold text-[10px] uppercase tracking-[0.3em] mb-3">PENDING_LATENCY</p>
-            <p className="text-4xl font-light text-white tracking-tighter uppercase">RM 2,550.00</p>
-            <p className="text-rose-500 font-mono text-[9px] uppercase tracking-widest mt-3 animate-pulse">08 FAIL_STATES</p>
+            <p className="text-gray-400 font-bold text-[11px] uppercase tracking-wider mb-1">Pending Fees</p>
+            <p className="text-3xl font-bold text-gray-900 tracking-tight">RM 2,550.00</p>
+            <p className="text-red-500 font-bold text-[10px] uppercase tracking-tight mt-1">8 students overdue</p>
           </div>
         </div>
       </div>
 
       {/* Table Section */}
-      <div className="space-y-10">
-        <div className="immersive-card rounded-2xl overflow-hidden shadow-2xl">
-          <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/2">
-            <div className="flex items-center gap-4">
-              <div className="w-2.5 h-2.5 rounded-sm bg-primary shadow-[0_0_10px_#22d3ee] animate-pulse" />
-              <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.4em]">POTTERY_GENESIS // SAT_10:00</h4>
+      <div className="space-y-6">
+        <div className="minimal-card rounded-xl overflow-hidden shadow-sm bg-white border border-gray-100">
+          <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-gray-900" />
+              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest">October Fee Record</h4>
             </div>
-            <span className="px-5 py-2 bg-white/5 text-white/30 font-mono text-[10px] rounded-lg border border-white/10 uppercase tracking-widest">12_NODES_ACTIVE</span>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">Pottery Genesis • Saturday 10:00</span>
           </div>
-          <div className="overflow-x-auto custom-scrollbar">
-            <table className="w-full text-left border-collapse min-w-[800px]">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-white/[0.02] border-b border-white/5">
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">USER_IDENTITY</th>
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">CREDIT_LOAD</th>
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">TIME_STAMP</th>
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">SYNC_STATUS</th>
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">PROTOCOL</th>
-                  <th className="px-8 py-6 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em] text-right">OPERATIONS</th>
+                <tr className="border-b border-gray-50 bg-white">
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Student</th>
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Amount</th>
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Method</th>
+                  <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/2">
+              <tbody className="divide-y divide-gray-50">
                 {tableData.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-white/[0.03] transition-all group border-white/2 cursor-pointer">
-                    <td className="px-8 py-6">
-                      <div className="flex items-center gap-5">
+                  <tr key={idx} className="hover:bg-gray-50/50 transition-all group cursor-pointer">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
                         {row.avatar ? (
-                          <img className="w-10 h-10 rounded-lg object-cover border border-white/10 group-hover:border-primary/50 transition-all" src={row.avatar} alt={row.name} />
+                          <img className="w-9 h-9 rounded-lg object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all border border-gray-100" src={row.avatar} alt={row.name} />
                         ) : (
-                          <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-primary font-mono text-[10px] font-bold uppercase group-hover:border-primary transition-all">SY</div>
+                          <div className="w-9 h-9 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-400 font-bold text-[10px] uppercase">SY</div>
                         )}
-                        <span className="text-sm font-light text-white uppercase tracking-tight group-hover:text-primary transition-colors">{row.name}</span>
+                        <span className="text-sm font-bold text-gray-900 uppercase tracking-tight group-hover:text-blue-600 transition-colors">{row.name}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 font-mono text-white text-sm">{row.amount}</td>
-                    <td className="px-8 py-6 text-white/30 font-mono text-[11px] uppercase tracking-widest">{row.date}</td>
-                    <td className="px-8 py-6">
-                      <span className={`inline-flex items-center px-4 py-1.5 rounded-lg text-[9px] font-mono uppercase tracking-widest border ${
-                        row.status === 'PAID' ? 'bg-emerald-400/10 text-emerald-400 border-emerald-400/20' : 
-                        row.status === 'OVERDUE' ? 'bg-rose-500/10 text-rose-500 border-rose-500/20 animate-pulse' : 'bg-amber-400/10 text-amber-400 border-amber-400/20'
+                    <td className="px-6 py-4 font-bold text-gray-900 text-sm tracking-tight">{row.amount}</td>
+                    <td className="px-6 py-4 text-gray-400 font-bold text-[11px] uppercase tracking-tighter">{row.date}</td>
+                    <td className="px-6 py-4">
+                      <span className={`inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-tight border border-transparent ${
+                        row.status === 'PAID' ? 'bg-green-50 text-green-700' : 
+                        row.status === 'OVERDUE' ? 'bg-red-50 text-red-700 animate-pulse' : 'bg-amber-50 text-amber-700'
                       }`}>
                         {row.status}
                       </span>
                     </td>
-                    <td className="px-8 py-6">
-                      <div className="flex items-center gap-3 text-white/30 font-mono text-[10px] uppercase tracking-widest">
-                        {row.icon && <row.icon className="w-3.5 h-3.5 text-primary opacity-50" />}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2 text-gray-400 font-bold text-[10px] uppercase tracking-tight">
+                        {row.icon && <row.icon className="w-3.5 h-3.5 text-gray-300" />}
                         <span>{row.method}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-right">
+                    <td className="px-6 py-4 text-right">
                       {row.remind ? (
-                        <button className="text-[9px] font-bold text-primary uppercase tracking-[0.2em] px-5 py-2 border border-primary/20 bg-primary/5 rounded-lg hover:bg-primary/10 transition-all">RE_SYNC</button>
+                        <button className="text-[10px] font-bold text-gray-900 uppercase tracking-wider px-4 py-1.5 border border-gray-200 bg-white rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all active:scale-[0.98]">Remind</button>
                       ) : (
-                        <button className="p-2 text-white/10 hover:text-primary transition-all group-hover:text-white/40">
+                        <button className="p-2 text-gray-200 hover:text-gray-900 transition-all">
                           <MoreVertical className="w-5 h-5" />
                         </button>
                       )}
@@ -160,86 +153,79 @@ export default function PaymentsView() {
               </tbody>
             </table>
           </div>
-          <div className="p-5 bg-white/[0.01] text-center border-t border-white/5 transition-all hover:bg-white/[0.03]">
-            <button className="text-[10px] font-bold text-primary uppercase tracking-[0.4em] hover:brightness-125 flex items-center gap-4 mx-auto group">
-              SCAN_FULL_DIRECTORY
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+          <div className="p-4 bg-gray-50/50 text-center border-t border-gray-50 transition-all hover:bg-gray-100/50">
+            <button className="text-[11px] font-bold text-gray-500 uppercase tracking-widest hover:text-gray-900 flex items-center justify-center gap-2 mx-auto group">
+              View Full Directory
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Bottom Insights */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div className="lg:col-span-5 immersive-card rounded-2xl p-8 shadow-2xl relative overflow-hidden bg-gradient-to-br from-white/[0.02] to-transparent">
-          <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-[0.4em] mb-10 border-b border-white/5 pb-4 flex items-center gap-4">
-            <History className="w-5 h-5 text-primary" />
-            SIGNAL_HISTORY
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-5 minimal-card rounded-xl p-8 border border-gray-100 flex flex-col bg-white">
+          <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-8 border-b border-gray-50 pb-4 flex items-center gap-3">
+            <History className="w-4 h-4 text-gray-400" />
+            Collection Logs
           </h4>
-          <div className="space-y-10 relative ml-3">
-            <div className="absolute left-[-2px] top-2 bottom-2 w-[1px] bg-white/5" />
+          <div className="space-y-8 flex-1">
             {[
-              { label: 'USER_AKH_SYNCED: RM 350.00', time: '2H_AGO // QR_PROTOCOL', icon: CheckCircle2, color: 'bg-emerald-400 shadow-[0_0_15px_#34d399]' },
-              { label: 'REMINDER_DISPATCHED: USER_YSM', time: '5H_AGO // COM_SIGNAL_WA', icon: Mail, color: 'bg-white/10 border border-white/10' },
-              { label: 'USER_TCH_SYNCED: RM 280.00', time: '1D_AGO // CASH_OVERRIDE', icon: CheckCircle2, color: 'bg-emerald-400 shadow-[0_0_15px_#34d399]' }
+              { label: 'Adam Hakim Paid: RM 350.00', time: '2 hours ago • QR Code', icon: CheckCircle2, color: 'bg-green-50 text-green-600 border-green-100' },
+              { label: 'Reminder sent to Siti Yasmin', time: '5 hours ago • via WhatsApp', icon: Mail, color: 'bg-gray-50 text-gray-500 border-gray-100' },
+              { label: 'Leila Wong Transfer Paid', time: '1 day ago • Online Transfer', icon: CheckCircle2, color: 'bg-green-50 text-green-600 border-green-100' }
             ].map((log, idx) => (
-              <div key={idx} className="flex gap-6 relative group cursor-pointer">
-                <div className={`w-10 h-10 rounded-lg ${log.color} flex items-center justify-center z-10 shrink-0 group-hover:scale-110 group-hover:brightness-125 transition-all border border-white/10`}>
-                  <log.icon className={`w-5 h-5 ${log.color.includes('emerald') ? 'text-white' : 'text-white/40'}`} />
+              <div key={idx} className="flex gap-4 relative group cursor-pointer">
+                <div className={`w-10 h-10 rounded-lg ${log.color} flex items-center justify-center z-10 shrink-0 border transition-all group-hover:scale-110 shadow-sm`}>
+                  <log.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-light text-white group-hover:text-primary transition-colors leading-tight uppercase tracking-tight mb-2">{log.label}</p>
-                  <p className="text-[9px] font-mono font-bold text-white/20 uppercase tracking-widest">{log.time}</p>
+                  <p className="text-sm font-bold text-gray-900 uppercase tracking-tight group-hover:text-blue-600 transition-colors leading-tight mb-1">{log.label}</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{log.time}</p>
                 </div>
               </div>
             ))}
           </div>
-          <button className="w-full mt-12 py-4 bg-white/5 border border-white/10 text-[9px] font-bold text-white/40 uppercase tracking-[0.3em] rounded-xl hover:bg-white/10 hover:text-white transition-all">ACCESS_FULL_LOGS</button>
+          <button className="w-full mt-10 py-3.5 bg-gray-50 border border-gray-200 text-[11px] font-bold text-gray-500 uppercase tracking-wider rounded-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all active:scale-[0.98]">
+            View All Logs
+          </button>
         </div>
 
-        <div className="lg:col-span-7 immersive-card rounded-2xl p-10 shadow-2xl flex flex-col border-r-2 border-primary">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6 relative z-10">
-            <h4 className="text-[11px] font-bold text-white flex items-center gap-4 uppercase tracking-[0.4em]">
-              <TrendingUp className="w-6 h-6 text-primary" />
-              COLLECTION_TREND_DELTA
+        <div className="lg:col-span-7 minimal-card rounded-xl p-8 border border-gray-100 flex flex-col bg-white">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+            <h4 className="text-[11px] font-bold text-gray-400 flex items-center gap-3 uppercase tracking-widest">
+              <TrendingUp className="w-4 h-4 text-gray-400" />
+              Revenue Trend
             </h4>
-            <div className="bg-white/5 p-1 rounded-xl flex gap-2 border border-white/10">
-              {['6_MONTH_DELTA', 'YEAR_SYNC'].map((opt, i) => (
-                <button key={opt} className={`px-6 py-2.5 rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] transition-all ${i === 0 ? 'bg-primary text-on-primary shadow-lg' : 'text-white/30 hover:text-white'}`}>
+            <div className="bg-gray-50 p-1 rounded-lg flex gap-1 border border-gray-100">
+              {['6 Months', 'Yearly'].map((opt, i) => (
+                <button key={opt} className={`px-4 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-tight transition-all ${i === 0 ? 'bg-white text-gray-900 shadow-sm border border-gray-100' : 'text-gray-400 hover:text-gray-900'}`}>
                   {opt}
                 </button>
               ))}
             </div>
           </div>
-          <div className="flex-1 flex items-end justify-between gap-6 h-60 min-h-[280px] pb-8 px-4 relative group z-10">
-            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-[0.03]">
-              {[1, 2, 3, 4].map(i => <div key={i} className="h-px w-full bg-white" />)}
+          <div className="flex-1 flex items-end justify-between gap-4 h-56 min-h-[240px] pb-6 px-2 relative group">
+            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-[0.4] py-1">
+              {[1, 2, 3, 4].map(i => <div key={i} className="h-[1px] w-full bg-gray-50" />)}
             </div>
             {[40, 55, 50, 75, 85, 95].map((h, i) => (
               <div 
                 key={i} 
-                className={`flex-1 rounded-xl transition-all duration-1000 relative group/bar relative overflow-hidden cursor-pointer ${i === 5 ? 'bg-primary shadow-[0_0_30px_rgba(34,211,238,0.3)]' : 'bg-white/[0.03] border border-white/5 hover:bg-white/[0.08]'}`} 
+                className={`flex-1 rounded-md transition-all duration-700 relative group/bar cursor-pointer ${i === 5 ? 'bg-gray-900' : 'bg-gray-100 hover:bg-gray-200'}`} 
                 style={{ height: `${h}%` }}
               >
-                 {i === 5 && (
-                  <motion.div 
-                    initial={{ height: 0 }}
-                    animate={{ height: '100%' }}
-                    className="absolute inset-0 bg-white/20 animate-pulse"
-                  />
-                )}
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md border border-white/10 text-white font-mono text-[9px] px-3 py-1.5 rounded opacity-0 group-hover/bar:opacity-100 transition-all whitespace-nowrap z-20 shadow-2xl">
-                  RM {(h * 150).toLocaleString()}.00
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white font-bold text-[10px] px-2.5 py-1 rounded opacity-0 group-hover/bar:opacity-100 transition-all whitespace-nowrap z-20 shadow-lg pointer-events-none uppercase tracking-tight">
+                  RM {(h * 150).toLocaleString()}
                 </div>
               </div>
             ))}
           </div>
-          <div className="flex justify-between text-[9px] font-mono font-bold text-white/20 tracking-[0.4em] uppercase px-6 pt-6 border-t border-white/5 mt-6 z-10">
-            {['MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT'].map((m, i) => (
-              <span key={m} className={i === 5 ? 'text-primary' : ''}>{m}</span>
+          <div className="flex justify-between text-[11px] font-bold text-gray-400 tracking-tight uppercase px-4 pt-4 border-t border-gray-50 mt-4">
+            {['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'].map((m, i) => (
+              <span key={m} className={i === 5 ? 'text-gray-900' : ''}>{m}</span>
             ))}
           </div>
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] pointer-events-none" />
         </div>
       </div>
     </div>

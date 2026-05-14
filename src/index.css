@@ -1,68 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #22d3ee; /* cyan-400 */
-  --color-on-primary: #020205;
-  --color-primary-container: rgba(34, 211, 238, 0.1);
-  --color-on-primary-container: #22d3ee;
+  --color-primary: #111827; /* Darker gray/black for minimal feel */
+  --color-on-primary: #ffffff;
+  --color-primary-container: #f3f4f6;
+  --color-on-primary-container: #111827;
   
-  --color-secondary: rgba(255, 255, 255, 0.4);
-  --color-secondary-container: rgba(255, 255, 255, 0.05);
-  --color-on-secondary-container: rgba(255, 255, 255, 0.6);
+  --color-secondary: #6b7280;
+  --color-secondary-container: #f9fafb;
+  --color-on-secondary-container: #374151;
   
-  --color-tertiary: #a5b4fc; /* indigo-300 */
-  --color-tertiary-container: rgba(165, 180, 252, 0.1);
-  --color-on-tertiary-container: #a5b4fc;
+  --color-tertiary: #4f46e5; /* indigo-600 */
+  --color-tertiary-container: #eef2ff;
+  --color-on-tertiary-container: #4f46e5;
   
-  --color-error: #f43f5e; /* rose-500 */
-  --color-error-container: rgba(244, 63, 94, 0.1);
-  --color-on-error-container: #f43f5e;
+  --color-error: #ef4444; /* red-500 */
+  --color-error-container: #fef2f2;
+  --color-on-error-container: #ef4444;
   
-  --color-background: #020205;
-  --color-surface: #020205;
-  --color-surface-container: rgba(255, 255, 255, 0.03);
-  --color-surface-container-low: rgba(255, 255, 255, 0.02);
-  --color-surface-container-lowest: #000000;
-  --color-outline: rgba(255, 255, 255, 0.1);
-  --color-outline-variant: rgba(255, 255, 255, 0.05);
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-container: #f9fafb;
+  --color-surface-container-low: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-outline: #e5e7eb;
+  --color-outline-variant: #f3f4f6;
   
-  --font-h1: "Plus Jakarta Sans", sans-serif;
-  --font-h2: "Plus Jakarta Sans", sans-serif;
-  --font-sans: "Be Vietnam Pro", sans-serif;
+  --font-h1: "Inter", sans-serif;
+  --font-h2: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
 }
 
 @layer base {
   body {
-    @apply bg-background text-slate-200 antialiased selection:bg-primary/30 selection:text-white;
+    @apply bg-white text-gray-900 antialiased selection:bg-gray-100 selection:text-black;
   }
 }
 
 @layer components {
-  .immersive-card {
-    @apply bg-black/40 backdrop-blur-md border border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.4)];
+  .minimal-card {
+    @apply bg-white border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all;
   }
   
-  .glow-primary {
-    @apply shadow-[0_0_20px_rgba(34,211,238,0.2)];
+  .minimal-button {
+    @apply px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 active:scale-[0.98] transition-all disabled:opacity-50;
   }
 
-  .tech-grid {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
-    background-size: 40px 40px;
+  .minimal-input {
+    @apply w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 text-sm focus:border-gray-900 focus:bg-white outline-none transition-all placeholder:text-gray-400;
   }
   
   .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-white/10 rounded-full;
+    @apply bg-gray-200 rounded-full hover:bg-gray-300;
   }
 }

@@ -23,229 +23,216 @@ export default function StudentsView() {
   ];
 
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-8 pb-20">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-end gap-6 relative">
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-[2px] bg-primary"></div>
-            <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">COMMUNITY_DATABASE</span>
-          </div>
-          <h2 className="text-4xl font-light text-white tracking-widest uppercase mb-2">Student Directory</h2>
-          <p className="text-sm text-white/40 font-mono tracking-widest uppercase">USER_PROFILES // 24_ENTITIES_SYNCED</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-1">Student Directory</h2>
+          <p className="text-sm text-gray-500 font-medium">24 active students enrolled</p>
         </div>
-        <div className="flex gap-4 relative z-10">
-          <button className="flex items-center gap-3 bg-white/5 border border-white/10 text-white/80 px-8 py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 group">
-            <Filter className="w-4 h-4 text-primary group-hover:scale-125 transition-transform" />
-            FILTER_LOGS
+        <div className="flex gap-3">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-all active:scale-[0.98]">
+            <Filter className="w-4 h-4 text-gray-400" />
+            Filter
           </button>
-          <button className="flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-lg text-sm font-semibold hover:bg-gray-800 transition-all shadow-sm active:scale-[0.98]">
             <UserPlus className="w-4 h-4" />
-            REGISTER_USER
+            Register Student
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Sidebar: Student List */}
-        <div className="lg:col-span-4 space-y-8">
-          <div className="immersive-card rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-            <div className="flex items-center justify-between mb-8 opacity-60">
-              <span className="text-[10px] font-bold uppercase text-white tracking-[0.3em]">24_USER_SIGNALS</span>
-              <button className="text-primary">
-                <ChevronDown className="w-5 h-5" />
+        <div className="lg:col-span-4 space-y-6">
+          <div className="minimal-card rounded-xl p-6 shadow-sm overflow-hidden bg-white">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-xs font-bold text-gray-400 uppercase tracking-tight">Active Students</span>
+              <button className="text-gray-400 hover:text-gray-900">
+                <ChevronDown className="w-4 h-4" />
               </button>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-3">
               {students.map((student, idx) => (
                 <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.05 }}
                   key={student.name} 
-                  className={`group p-6 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${
+                  className={`group p-4 rounded-xl border transition-all cursor-pointer relative ${
                     student.name === 'Zara Ahmad' 
-                      ? 'bg-primary/10 border-primary/30 shadow-[inset_0_0_20px_rgba(34,211,238,0.05)]' 
-                      : 'bg-white/[0.01] border-white/5 hover:border-white/20'
+                      ? 'bg-gray-50 border-gray-100 shadow-sm' 
+                      : 'bg-transparent border-transparent hover:bg-gray-50/50 hover:border-gray-100'
                   }`}
                 >
-                  <div className="flex items-center gap-5 relative z-10">
-                    <img className="w-14 h-14 rounded-lg object-cover border border-white/10 group-hover:border-primary/50 transition-all" src={student.avatar} alt={student.name} />
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-sm font-light text-white tracking-wide uppercase group-hover:text-primary transition-colors leading-none">{student.name}</h3>
-                        <span className={`text-[8px] font-mono uppercase px-2 py-1 rounded border ${
-                          student.status === 'PAID' ? 'bg-emerald-400/10 text-emerald-400 border-emerald-400/20' : 
-                          student.status === 'OVERDUE' ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' : 'bg-amber-400/10 text-amber-400 border-amber-400/20'
+                  <div className="flex items-center gap-4">
+                    <img className="w-12 h-12 rounded-lg object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all border border-gray-100" src={student.avatar} alt={student.name} />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-start mb-1 gap-2">
+                        <h3 className="text-sm font-bold text-gray-900 truncate uppercase tracking-tight group-hover:text-blue-600 transition-colors">{student.name}</h3>
+                        <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded border border-transparent ${
+                          student.status === 'PAID' ? 'bg-green-50 text-green-700' : 
+                          student.status === 'OVERDUE' ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-700'
                         }`}>
                           {student.status}
                         </span>
                       </div>
-                      <p className="text-[9px] text-white/30 font-mono uppercase tracking-widest">{student.class}</p>
+                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight truncate">{student.class}</p>
                     </div>
                   </div>
-                  <div className="mt-6 flex items-center justify-between text-[9px] font-mono font-bold text-white/20 relative z-10">
-                    <span className="flex items-center gap-2 group-hover:text-white/40 transition-colors uppercase tracking-widest">
-                      <Phone className="w-3 h-3 text-primary opacity-40 group-hover:opacity-100 transition-opacity" /> 
+                  <div className="mt-4 flex items-center justify-between text-[10px] font-semibold">
+                    <span className="flex items-center gap-1.5 text-gray-400 group-hover:text-gray-600 transition-colors">
+                      <Phone className="w-3 h-3" /> 
                       {student.phone}
                     </span>
-                    <span className={`transition-colors uppercase tracking-widest ${student.name === 'Zara Ahmad' ? 'text-primary' : ''}`}>
-                      {student.attendance}_LOAD
+                    <span className={`text-gray-400 font-bold uppercase tracking-tighter ${student.name === 'Zara Ahmad' ? 'text-gray-900' : ''}`}>
+                      {student.attendance} Attendance
                     </span>
                   </div>
-                  {student.name === 'Zara Ahmad' && (
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 blur-2xl rounded-full" />
-                  )}
                 </motion.div>
               ))}
             </div>
-            <button className="w-full mt-10 py-4 border border-dashed border-white/5 text-white/20 font-mono text-[9px] uppercase tracking-widest hover:border-primary/50 hover:text-primary transition-all rounded-xl">SYNC_FULL_DATABASE</button>
+            <button className="w-full mt-8 py-3 border border-dashed border-gray-200 text-gray-400 font-bold text-[11px] uppercase tracking-wider hover:border-gray-900 hover:text-gray-900 transition-all rounded-xl">
+              Load More
+            </button>
           </div>
         </div>
 
         {/* Right Content: Student Details */}
-        <div className="lg:col-span-8 space-y-10">
+        <div className="lg:col-span-8 space-y-8">
           {/* Profile Header */}
-          <div className="immersive-card rounded-2xl p-10 shadow-2xl relative overflow-hidden border-l-2 border-primary">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-            <div className="flex flex-col md:flex-row gap-10 items-start relative z-10">
+          <div className="minimal-card rounded-xl p-8 border-l-4 border-gray-900 bg-white">
+            <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="relative group shrink-0">
                 <img 
-                  className="w-40 h-40 rounded-xl object-cover border border-white/10 shadow-2xl group-hover:border-primary/50 transition-all duration-700" 
+                  className="w-36 h-36 rounded-xl object-cover border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500" 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWh2EOdXpNuTNWqmFaX69Vp8610ryAkDTQmrNCTdLbPNGB9Ccfo1FnbP1YR-9LbshA8-Dg9UqtqPnXvEI5yssiEAJ5RtLFiB2vK0skqnzMdi1vmYfSiNJ4iPDs1s01g2DgjRGDc4eekOfT9h6sHQNCp5oY4bxXmQ1c3dDcWwYlrBKeQbFfCrrEMWS2Eh6fKlUw0POBRD6uZ9isdhtFdPDvN89cXlm90JII0iTagVkRIjE9ehRNLSyJ7fAbXceFEdB7WxrNhb2mRvGI" 
                   alt="Zara" 
                 />
-                <button className="absolute -bottom-3 -right-3 bg-primary text-on-primary p-3 rounded-lg shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:scale-110 active:scale-95 transition-all">
-                  <Edit2 className="w-4 h-4" />
+                <button className="absolute -bottom-2 -right-2 bg-gray-900 text-white p-2.5 rounded-lg shadow-md hover:scale-110 active:scale-95 transition-all">
+                  <Edit2 className="w-3.5 h-3.5" />
                 </button>
               </div>
               
-              <div className="flex-1 space-y-8">
-                <div className="flex flex-wrap items-center gap-6">
-                  <h3 className="text-4xl font-light text-white tracking-widest uppercase">Zara Ahmad</h3>
-                  <span className="bg-emerald-400/10 text-emerald-400 text-[10px] font-mono font-bold px-5 py-2 rounded-lg border border-emerald-400/20 uppercase tracking-[0.2em] shadow-glow-primary">PRIME_STATUS: PAID</span>
+              <div className="flex-1 space-y-6">
+                <div className="flex flex-wrap items-center gap-4">
+                  <h3 className="text-3xl font-bold text-gray-900 tracking-tight">Zara Ahmad</h3>
+                  <span className="bg-green-50 text-green-700 text-[10px] font-bold px-3 py-1.5 rounded-md border border-green-100 uppercase tracking-tight">Prime Status: Paid</span>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-2">
                   <div>
-                    <p className="text-[9px] font-bold uppercase text-white/30 tracking-[0.3em] mb-3">CURRENT_PROGRAM</p>
-                    <p className="text-white font-light text-lg uppercase tracking-wider leading-tight">Advanced Pottery<br/><span className="text-[9px] font-mono text-primary uppercase tracking-widest mt-2 block opacity-60">SYNC: Tue 15:00</span></p>
+                    <p className="text-[10px] font-bold uppercase text-gray-400 tracking-tight mb-1.5">Program</p>
+                    <p className="text-gray-900 font-bold text-sm uppercase tracking-tight">Advanced Pottery</p>
+                    <p className="text-[10px] font-semibold text-gray-400 mt-0.5">Tue 15:00</p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-bold uppercase text-white/30 tracking-[0.3em] mb-3">UP_LINK_PARENT</p>
-                    <p className="text-white font-light text-lg uppercase tracking-wider leading-tight">Mrs. Farah Ahmad</p>
+                    <p className="text-[10px] font-bold uppercase text-gray-400 tracking-tight mb-1.5">Parent</p>
+                    <p className="text-gray-900 font-bold text-sm uppercase tracking-tight">Mrs. Farah Ahmad</p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-bold uppercase text-white/30 tracking-[0.3em] mb-3">ENLISTMENT_DATE</p>
-                    <p className="text-white font-light text-lg uppercase tracking-wider leading-tight">JANUARY 2023</p>
+                    <p className="text-[10px] font-bold uppercase text-gray-400 tracking-tight mb-1.5">Enrolled</p>
+                    <p className="text-gray-900 font-bold text-sm uppercase tracking-tight">January 2023</p>
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap gap-6 pt-4">
-                  <button className="flex items-center justify-center gap-3 bg-[#25D366]/20 border border-[#25D366]/40 text-[#25D366] px-10 py-4 rounded-xl font-bold uppercase tracking-[0.3em] text-[10px] transition-all hover:bg-[#25D366]/30 active:scale-95 group overflow-hidden relative">
-                    <MessageCircle className="w-4 h-4 fill-current group-hover:scale-125 transition-transform" />
-                    COM_SIGNAL_WA
+                <div className="flex flex-wrap gap-4 pt-4">
+                  <button className="flex items-center justify-center gap-2 px-6 py-2.5 bg-gray-50 border border-gray-100 text-gray-900 rounded-lg text-[11px] font-bold uppercase tracking-wider hover:bg-gray-100 transition-all group active:scale-[0.98]">
+                    <MessageCircle className="w-3.5 h-3.5 text-green-600" />
+                    WhatsApp
                   </button>
-                  <button className="flex items-center justify-center gap-3 border border-white/10 bg-white/5 px-10 py-4 rounded-xl font-bold uppercase tracking-[0.3em] text-[10px] text-white/40 hover:bg-white/10 hover:text-white transition-all group overflow-hidden relative">
-                    <Mail className="w-4 h-4 group-hover:scale-125 transition-transform" />
-                    SEND_DIRECT_MAIL
+                  <button className="flex items-center justify-center gap-2 px-6 py-2.5 bg-white border border-gray-200 text-gray-500 rounded-lg text-[11px] font-bold uppercase tracking-wider hover:text-gray-900 hover:border-gray-300 transition-all active:scale-[0.98]">
+                    <Mail className="w-3.5 h-3.5" />
+                    Send Email
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Progress Timeline */}
-            <div className="immersive-card rounded-2xl p-8 shadow-2xl flex flex-col h-full bg-gradient-to-br from-white/[0.02] to-transparent">
-              <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/5">
-                <h4 className="text-[10px] font-bold text-white/40 flex items-center gap-4 uppercase tracking-[0.3em]">
-                  <FileText className="w-4 h-4 text-primary" />
-                  DEVELOPMENT_LOG
+            <div className="minimal-card rounded-xl p-8 border border-gray-100">
+              <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-50">
+                <h4 className="text-[11px] font-bold text-gray-400 flex items-center gap-2 uppercase tracking-widest">
+                  <FileText className="w-4 h-4" />
+                  Progress Notes
                 </h4>
-                <button className="text-[9px] font-mono text-primary uppercase tracking-[0.2em] border border-primary/20 bg-primary/5 px-4 py-2 rounded-lg hover:bg-primary/10 transition-all">NEW_LOG_ENTRY</button>
+                <button className="text-[10px] font-bold text-gray-900 hover:underline px-2 py-1 rounded-md transition-all">New Entry</button>
               </div>
-              <div className="space-y-12 relative ml-3 flex-1">
-                <div className="absolute left-0 top-1 bottom-4 w-[1px] bg-white/5"></div>
+              <div className="space-y-10 relative">
+                <div className="absolute left-1.5 top-1 bottom-4 w-px bg-gray-100"></div>
                 
-                <div className="relative pl-12 group/log">
-                  <div className="absolute left-[-4px] top-2 w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_#22d3ee] z-10 transition-transform group-hover/log:scale-150 group-hover/log:animate-ping cursor-pointer"></div>
-                  <p className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em] mb-2">COORD: 2023.10.24</p>
-                  <h5 className="text-lg font-light text-white tracking-wide uppercase mb-3">Centering Mastered</h5>
-                  <p className="text-sm text-white/40 font-light leading-relaxed uppercase tracking-tight">Zara has shown great improvement in centering larger clay masses (up to 2kg). Ready for taller cylinder forms.</p>
+                <div className="relative pl-8 group">
+                  <div className="absolute left-[-2.5px] top-1.5 w-2 h-2 bg-gray-900 rounded-full z-10 transition-transform group-hover:scale-125"></div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">24 Oct 2023</p>
+                  <h5 className="text-sm font-bold text-gray-900 uppercase tracking-tight mb-2">Centering Mastered</h5>
+                  <p className="text-xs text-gray-500 font-medium leading-relaxed">Zara has shown great improvement in centering larger clay masses (up to 2kg). Ready for taller cylinder forms.</p>
                 </div>
                 
-                <div className="relative pl-12 group/log opacity-60 hover:opacity-100 transition-opacity">
-                  <div className="absolute left-[-4px] top-2 w-2 h-2 bg-white/10 rounded-full border border-white/20 shadow-sm z-10"></div>
-                  <p className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em] mb-2">COORD: 2023.10.10</p>
-                  <h5 className="text-lg font-light text-white tracking-wide uppercase mb-3">Experimental Glazing</h5>
-                  <p className="text-sm text-white/40 font-light leading-relaxed uppercase tracking-tight">Focused on layering matte glazes. Encouraged her to keep a glazing diary.</p>
+                <div className="relative pl-8 opacity-60 hover:opacity-100 transition-opacity group">
+                  <div className="absolute left-[-2.5px] top-1.5 w-2 h-2 bg-gray-200 rounded-full group-hover:bg-gray-400 z-10"></div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">10 Oct 2023</p>
+                  <h5 className="text-sm font-bold text-gray-900 uppercase tracking-tight mb-2">Experimental Glazing</h5>
+                  <p className="text-xs text-gray-500 font-medium leading-relaxed">Focused on layering matte glazes. Encouraged her to keep a glazing diary.</p>
                 </div>
               </div>
             </div>
 
             {/* Attendance & Payments Column */}
-            <div className="space-y-10">
-              {/* Attendance History */}
-              <div className="immersive-card rounded-2xl p-8 shadow-2xl overflow-hidden relative group">
-                <div className="flex items-center justify-between mb-10">
-                  <h4 className="text-[10px] font-bold text-white/40 flex items-center gap-4 uppercase tracking-[0.3em]">
-                    <TrendingUp className="w-4 h-4 text-primary" />
-                    LOAD_EFFICIENCY
+            <div className="space-y-8">
+              {/* Attendance Status */}
+              <div className="minimal-card rounded-xl p-8 border border-gray-100 flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-8">
+                  <h4 className="text-[11px] font-bold text-gray-400 flex items-center gap-2 uppercase tracking-widest">
+                    <TrendingUp className="w-4 h-4" />
+                    Attendance
                   </h4>
-                  <span className="text-primary font-mono text-4xl font-light tracking-tighter">92%</span>
+                  <span className="text-gray-900 font-bold text-2xl tracking-tighter">92%</span>
                 </div>
-                <div className="flex items-end justify-between h-24 gap-4 px-2 relative">
+                <div className="flex items-end justify-between h-20 gap-3 px-1 relative">
                   {[90, 85, 95, 92, 20].map((h, i) => (
                     <div 
                       key={i} 
-                      className={`w-full rounded-t-lg transition-all duration-700 relative overflow-hidden group/bar ${i === 4 ? 'bg-white/5 border border-white/5' : 'bg-primary/20 border border-primary/30'}`} 
+                      className={`w-full rounded-md transition-all duration-700 relative group overflow-hidden ${i === 4 ? 'bg-gray-100' : 'bg-gray-900'}`} 
                       style={{ height: `${h}%` }}
                     >
-                      {i !== 4 && (
-                         <motion.div 
-                          initial={{ height: 0 }}
-                          animate={{ height: '100%' }}
-                          className="absolute inset-0 bg-primary opacity-40 shadow-[0_0_20px_#22d3ee]"
-                        />
-                      )}
                       {i === 3 && (
-                        <div className="absolute inset-0 bg-primary animate-pulse opacity-20" />
+                        <div className="absolute inset-x-0 bottom-0 bg-white/20 h-1/2" />
                       )}
                     </div>
                   ))}
-                  <div className="absolute h-[1px] w-full bg-white/5 top-1/2 left-0 pointer-events-none"></div>
                 </div>
-                <div className="flex justify-between mt-6 text-[8px] font-mono font-bold text-white/20 uppercase tracking-[0.4em] px-2">
-                  <span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span>
+                <div className="flex justify-between mt-4 text-[9px] font-bold text-gray-400 uppercase tracking-tight">
+                  <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span>
                 </div>
               </div>
 
               {/* Payment History */}
-              <div className="immersive-card rounded-2xl p-8 shadow-2xl flex flex-col bg-gradient-to-tr from-transparent to-white/[0.01]">
-                <h4 className="text-[10px] font-bold text-white/40 mb-8 flex items-center gap-4 uppercase tracking-[0.4em] border-b border-white/5 pb-4">
-                  <History className="w-4 h-4 text-primary" />
-                  FISCAL_HISTORY
+              <div className="minimal-card rounded-xl p-8 border border-gray-100">
+                <h4 className="text-[11px] font-bold text-gray-400 mb-6 flex items-center gap-2 uppercase tracking-widest border-b border-gray-50 pb-4">
+                  <History className="w-4 h-4" />
+                  Payment History
                 </h4>
-                <div className="space-y-8 flex-1">
+                <div className="space-y-6">
                   {[
-                    { title: 'October Fees', id: '10294', date: '2023.10.01', amount: 'RM 250.00' },
-                    { title: 'Workshop Materials', id: '10156', date: '2023.09.15', amount: 'RM 85.00' }
+                    { title: 'October Fees', id: '10294', date: '01.10.2023', amount: 'RM 250' },
+                    { title: 'Materials', id: '10156', date: '15.09.2023', amount: 'RM 85' }
                   ].map((p, idx) => (
-                    <div key={idx} className="flex justify-between items-center group cursor-pointer border-b border-white/5 pb-4 hover:bg-white/[0.02] px-2 rounded-lg transition-all">
+                    <div key={idx} className="flex justify-between items-center group cursor-pointer border-b border-gray-50 pb-4 last:border-0 last:pb-0 hover:bg-gray-50/50 p-1 px-2 rounded-lg transition-all">
                       <div>
-                        <p className="text-sm font-light text-white uppercase tracking-wide group-hover:text-primary transition-colors leading-none mb-2">{p.title}</p>
-                        <p className="text-[9px] text-white/20 font-mono uppercase tracking-widest">INV: #{p.id} // TS: {p.date}</p>
+                        <p className="text-xs font-bold text-gray-900 uppercase tracking-tight group-hover:text-blue-600 transition-colors mb-1">{p.title}</p>
+                        <p className="text-[10px] text-gray-400 font-medium tracking-tight">INV #{p.id} • {p.date}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-mono text-white">{p.amount}</p>
-                        <p className="text-emerald-400 font-mono uppercase text-[8px] tracking-[0.2em] mt-2 group-hover:animate-pulse">TRANSFER_OK</p>
+                        <p className="text-sm font-semibold text-gray-900">{p.amount}</p>
+                        <p className="text-green-600 font-bold uppercase text-[9px] tracking-tight mt-1">Paid</p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <button className="w-full mt-10 py-4 text-[9px] font-bold text-primary uppercase tracking-[0.3em] bg-primary/5 border border-primary/20 rounded-xl hover:bg-primary/10 transition-all active:scale-[0.98]">
-                  ACCESS_ALL_LEDGER_DATA
+                <button className="w-full mt-8 py-3.5 text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100 hover:text-gray-900 transition-all active:scale-[0.98]">
+                  Full History
                 </button>
               </div>
             </div>
