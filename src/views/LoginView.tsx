@@ -70,126 +70,134 @@ export default function LoginView() {
           </h1>
           <p className="text-sm text-gray-500">
             {mode === 'login' && 'Enter your credentials to access your dashboard.'}
-            {mode === 'register' && 'Get started with a new account.'}
-            {mode === 'guest' && 'Preview the application with limited access.'}
+            {mode === 'register' && 'Create an account to start managing your studio.'}
+            {mode === 'guest' && 'Entering preview mode with limited access...'}
           </p>
         </div>
 
-        {!isSupabaseConfigured && (
-          <div className="mb-8 p-4 bg-amber-50 border border-amber-100 rounded-xl flex flex-col gap-2">
-            <div className="flex items-center gap-2 text-amber-700">
-              <Settings className="w-4 h-4" />
-              <span className="text-xs font-semibold">Configuration Required</span>
+        {isSupabaseConfigured ? (
+          <div className="space-y-6">
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`p-4 border rounded-xl flex items-center gap-3 ${
+                  error.includes('Verification') 
+                  ? 'bg-green-50 border-green-100 text-green-700' 
+                  : 'bg-red-50 border-red-100 text-red-700'
+                }`}
+              >
+                <ShieldAlert className="w-4 h-4 shrink-0" />
+                <p className="text-xs font-medium leading-relaxed">{error}</p>
+              </motion.div>
+            )}
+            {mode !== 'guest' ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-gray-700 ml-1">Email address</label>
+                  <input 
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="minimal-input"
+                    placeholder="name@example.com"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-gray-700 ml-1">Password</label>
+                  <input 
+                    type="password"
+                    required
+                    minLength={6}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="minimal-input"
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                <button 
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full minimal-button py-3 mt-2"
+                >
+                  {isLoading ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
+                  ) : (
+                    mode === 'login' ? 'Sign in' : 'Create account'
+                  )}
+                </button>
+              </form>
+            ) : (
+              <div className="space-y-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-6 text-center">
+                  <p className="text-sm text-gray-500 mb-6 font-light">
+                    Temporary session initiated. Data will be persisted for 24 hours.
+                  </p>
+                  <button 
+                    onClick={handleGuestLogin}
+                    disabled={isLoading}
+                    className="w-full bg-gray-900 text-white rounded-lg py-3 text-sm font-medium hover:bg-gray-800 transition-all shadow-sm"
+                  >
+                     {isLoading ? (
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
+                    ) : (
+                      'Confirm Guest Access'
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="flex flex-col gap-3 text-center mt-8">
+              {mode !== 'login' && (
+                <button 
+                  onClick={() => { setMode('login'); setError(null); }}
+                  className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  Already have an account? Sign in
+                </button>
+              )}
+              {mode !== 'register' && (
+                <button 
+                  onClick={() => { setMode('register'); setError(null); }}
+                  className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  Need an account? Sign up
+                </button>
+              )}
+              {mode !== 'guest' && (
+                <button 
+                  onClick={() => { setMode('guest'); setError(null); }}
+                  className="text-xs text-gray-400 font-medium hover:text-gray-900 transition-colors py-2"
+                >
+                  Continue as guest
+                </button>
+              )}
             </div>
-            <p className="text-xs text-amber-600/80 leading-relaxed">
-              Connectivity to Supabase is missing. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your project secrets.
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="p-6 bg-amber-50 border border-amber-100 rounded-xl flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-amber-700">
+                <Settings className="w-5 h-5" />
+                <span className="text-sm font-semibold">Configuration Required</span>
+              </div>
+              <p className="text-xs text-amber-700/80 leading-relaxed font-medium">
+                Connectivity to Supabase is missing or invalid. Please ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are correctly set in your environment.
+              </p>
+              <div className="mt-2 text-[10px] font-mono bg-white/50 p-2 rounded border border-amber-200 text-amber-800">
+                Check: Settings → Secrets & Env
+              </div>
+            </div>
+            
+            <p className="text-center text-xs text-gray-400 px-4">
+              The application requires a backend connection to handle authentication and data persistence.
             </p>
           </div>
         )}
-
-        {error && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className={`mb-8 p-4 border rounded-xl flex items-center gap-3 ${
-              error.includes('Verification') 
-              ? 'bg-green-50 border-green-100 text-green-700' 
-              : 'bg-red-50 border-red-100 text-red-700'
-            }`}
-          >
-            <ShieldAlert className="w-4 h-4 shrink-0" />
-            <p className="text-xs font-medium leading-relaxed">{error}</p>
-          </motion.div>
-        )}
-
-        <div className="space-y-6">
-          {mode !== 'guest' ? (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-gray-700 ml-1">Email address</label>
-                <input 
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="minimal-input"
-                  placeholder="name@example.com"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-medium text-gray-700 ml-1">Password</label>
-                <input 
-                  type="password"
-                  required
-                  minLength={6}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="minimal-input"
-                  placeholder="••••••••"
-                />
-              </div>
-
-              <button 
-                type="submit"
-                disabled={isLoading}
-                className="w-full minimal-button py-3 mt-2"
-              >
-                {isLoading ? (
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto"></div>
-                ) : (
-                  mode === 'login' ? 'Sign in' : 'Create account'
-                )}
-              </button>
-            </form>
-          ) : (
-            <div className="space-y-4">
-              <div className="bg-gray-50 border border-gray-100 rounded-xl p-6 text-center">
-                <p className="text-sm text-gray-500 mb-6 font-light">
-                  Temporary terminal access only. Activity will be discarded after 24 hours.
-                </p>
-                <button 
-                  onClick={handleGuestLogin}
-                  disabled={isLoading}
-                  className="w-full bg-white border border-gray-200 text-gray-900 rounded-lg py-3 text-sm font-medium hover:bg-gray-50 transition-all"
-                >
-                   {isLoading ? (
-                    <div className="w-4 h-4 border-2 border-gray-900/10 border-t-gray-900 rounded-full animate-spin mx-auto"></div>
-                  ) : (
-                    'Connect as Guest'
-                  )}
-                </button>
-              </div>
-            </div>
-          )}
-
-          <div className="flex flex-col gap-3 text-center mt-8">
-            {mode !== 'login' && (
-              <button 
-                onClick={() => { setMode('login'); setError(null); }}
-                className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                Already have an account? Sign in
-              </button>
-            )}
-            {mode !== 'register' && (
-              <button 
-                onClick={() => { setMode('register'); setError(null); }}
-                className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                Need an account? Register node
-              </button>
-            )}
-            {mode !== 'guest' && (
-              <button 
-                onClick={() => { setMode('guest'); setError(null); }}
-                className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                Continue as guest
-              </button>
-            )}
-          </div>
-        </div>
       </motion.div>
     </div>
   );
