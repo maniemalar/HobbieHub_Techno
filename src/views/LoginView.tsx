@@ -10,6 +10,7 @@ export default function LoginView() {
   const { signInAsGuest, signIn, signUp } = useAuth();
   const [mode, setMode] = useState<AuthMode>('login');
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ export default function LoginView() {
       if (mode === 'login') {
         await signIn(email, password);
       } else if (mode === 'register') {
-        await signUp(email, password);
+        await signUp(email, password, name);
         setError('Verification email sent! Please check your inbox.');
       }
     } catch (err: any) {
@@ -93,6 +94,19 @@ export default function LoginView() {
             )}
             {mode !== 'guest' ? (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {mode === 'register' && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-gray-700 ml-1">Full Name</label>
+                    <input 
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="minimal-input"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                )}
                 <div className="space-y-1.5">
                   <label className="text-xs font-medium text-gray-700 ml-1">Email address</label>
                   <input 
